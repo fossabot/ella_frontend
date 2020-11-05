@@ -27,10 +27,22 @@ export default {
 <style lang="scss">
 @import "styles";
 
+.main, .topbar {
+  width: 100vw;
+}
+
 #top {
   position: sticky;
   left: 0;
   top: 0;
+}
+.box {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+.main {
+  max-width: 900px;
 }
 
 /**
