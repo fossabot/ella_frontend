@@ -6,8 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "npm run compileSW && vue-cli-service build && npm run clean",
     "lint": "vue-cli-service lint",
-    "compileSW": "node src/utilities/compileSW.mjs",
-    "clean": "del-cli sw.js"
+    "clean": "del-cli sw.js",
+    "compileSW": "node src/utilities/compileSW.mjs"
   },
   "dependencies": {
     "bootstrap": "^4.5.3",
@@ -15,12 +15,14 @@
     "core-js": "^3.6.5",
     "dotenv": "^8.2.0",
     "register-service-worker": "^1.7.1",
-    "vue": "^2.6.12"
+    "vue": "^2.6.12",
+    "vue-router": "^3.2.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-pwa": "^4.5.7",
+    "@vue/cli-plugin-router": "^4.5.8",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
     "del-cli": "^3.0.1",
