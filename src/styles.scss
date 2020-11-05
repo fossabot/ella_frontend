@@ -6,6 +6,24 @@
   background-color: $primary !important;
 }
 
+$border-radius-scroll: 0px;
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+
+  ::-webkit-scrollbar-track {
+    border-radius: $border-radius-scroll !important;
+    background-color: transparent !important;
+  }
+
+
+  ::-webkit-scrollbar-thumb {
+    background: $primary !important;
+    border-radius: $border-radius-scroll !important;
+  }
+
 body {
   padding: 0;
   margin: 0;

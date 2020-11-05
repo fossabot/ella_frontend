@@ -28,7 +28,7 @@ export default {
 @import "styles";
 
 .main, .topbar {
-  width: 100vw;
+  width: 100%;
 }
 
 #top {
@@ -43,6 +43,7 @@ export default {
 }
 .main {
   max-width: 900px;
+  text-align: center;
 }
 
 /**
