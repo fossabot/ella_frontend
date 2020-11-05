@@ -9,6 +9,8 @@
     <div v-else class="hider">
       <custom-spinner class="mt-2"/>
     </div>
+
+    <sidebar/>
   </div>
 </template>
 
@@ -16,9 +18,11 @@
 import NavBarComp from "@/components/NavBarComp";
 import {mapGetters} from "vuex";
 import CustomSpinner from "@/components/CustomSpinner";
+import Sidebar from "@/components/Sidebar";
 export default {
   name: 'App',
   components: {
+    Sidebar,
     CustomSpinner,
     NavBarComp
   },
