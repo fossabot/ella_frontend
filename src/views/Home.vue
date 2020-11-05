@@ -1,15 +1,16 @@
 <template>
-  <div class="home">
-      <p>Hallo</p>
+  <div class="">
+    <span v-html="mainData.bodytext"/>
+    <span v-html="mainData.bodytext"/>
   </div>
 </template>
 
 <script>
-
+import {mapGetters} from "vuex";
 export default {
   name: 'Home',
-  components: {
-
-  }
+  computed: {
+    ...mapGetters(["mainData"])
+  },
 }
 </script>

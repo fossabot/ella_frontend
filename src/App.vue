@@ -2,7 +2,9 @@
   <div class="box">
     <nav-bar-comp class="topbar"/>
     <div id="app" class="main">
-      <router-view/>
+      <div style="max-width: 800px;">
+        <router-view/>
+      </div>
     </div>
   </div>
 </template>
@@ -24,6 +26,9 @@ export default {
 
 <style lang="scss">
 @import "styles";
+
+
+/**
 .box {
 
   display: flex;
@@ -38,34 +43,33 @@ export default {
 
   .main {
     flex: 1 1 auto;
-    overflow: hidden;
     padding: 5px 8px;
-    max-width: 800px;
     width: 100vw;
+    overflow: scroll;
   }
 
 
   //Scrollbars
 
-  $border-radius-scroll: 8px;
+  $border-radius-scroll: 0px;
   ::-webkit-scrollbar {
     width: 5px;
     height: 5px;
   }
 
-  /* Track */
+
   ::-webkit-scrollbar-track {
     border-radius: $border-radius-scroll !important;
-    background-color: white !important;
+    background-color: transparent !important;
   }
 
-  /* Handle */
+
   ::-webkit-scrollbar-thumb {
     background: $primary !important;
     border-radius: $border-radius-scroll !important;
   }
 }
-
+**/
 
 
 </style>
