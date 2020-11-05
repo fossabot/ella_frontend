@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <nav-bar-comp class="topbar"/>
+    <nav-bar-comp id="top" class="topbar"/>
     <div id="app" class="main">
       <div style="max-width: 800px;">
         <router-view/>
@@ -27,6 +27,11 @@ export default {
 <style lang="scss">
 @import "styles";
 
+#top {
+  position: sticky;
+  left: 0;
+  top: 0;
+}
 
 /**
 .box {
