@@ -4,23 +4,31 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "npm run compileSW && vue-cli-service build && npm run clean",
+    "lint": "vue-cli-service lint",
+    "compileSW": "node src/utilities/compileSW.mjs",
+    "clean": "del-cli sw.js"
   },
   "dependencies": {
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.17.3",
     "core-js": "^3.6.5",
+    "dotenv": "^8.2.0",
+    "register-service-worker": "^1.7.1",
     "vue": "^2.6.12"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-pwa": "^4.5.7",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
+    "del-cli": "^3.0.1",
+    "dotenv-cli": "^4.0.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.14.1",
+    "replace-in-file": "^6.1.0",
     "sass-loader": "^10.0.3",
     "vue-template-compiler": "^2.6.11"
   },
