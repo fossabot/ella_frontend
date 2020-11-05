@@ -19,7 +19,7 @@ async function compile() {
 
     if (!VUE_APP_TITLE) throwError("VUE_APP_TITLE");
     await replace({files: file, from: /%TITLE%/g, to: VUE_APP_TITLE.toLowerCase().replace(/ /g,"_")});
-    if (!API_ROOT_URL) throwError("API_ROOT_URL");
+    if (!API_ROOT_URL) throwError("VUE_APP_API_ROOT_URL");
     await replace({files: file, from: /%ROOT%/g, to: normURLS(API_ROOT_URL)})
 
 }

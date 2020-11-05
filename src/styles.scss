@@ -1,2 +1,18 @@
+#navbar {
+  //background: white !important;
+}
+
+::selection {
+  background-color: $primary !important;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+}
+
+
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import 'node_modules/bootstrap-vue/src/index.scss';
+
+
