@@ -1,26 +1,34 @@
 <template>
   <div class="box">
     <nav-bar-comp id="top" class="topbar"/>
-    <div id="app" class="main">
+    <div id="app" class="main" v-if="mainData">
       <div style="max-width: 800px;">
         <router-view/>
       </div>
+    </div>
+    <div v-else class="hider">
+      <custom-spinner class="mt-2"/>
     </div>
   </div>
 </template>
 
 <script>
 import NavBarComp from "@/components/NavBarComp";
-
+import {mapGetters} from "vuex";
+import CustomSpinner from "@/components/CustomSpinner";
 export default {
   name: 'App',
   components: {
+    CustomSpinner,
     NavBarComp
   },
   created() {
     console.log(process.env.VUE_APP_API_ROOT_URL);
     this.$store.commit("getMainData");
-  }
+  },
+  computed: {
+    ...mapGetters(["mainData"])
+  },
 }
 </script>
 
@@ -43,7 +51,12 @@ export default {
 }
 .main {
   max-width: 900px;
+  padding: 8px 12px;
   text-align: center;
+}
+
+.hider {
+  width: 100vw;
 }
 
 /**

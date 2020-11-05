@@ -1,6 +1,9 @@
 <template>
   <b-navbar id="navbar" :type="isLightColor?'light':'dark'" class="navbarCustom" variant="primary">
-    <b-navbar-brand href="#">{{ (mainData || {title: env.VUE_APP_TITLE}).title }}</b-navbar-brand>
+    <b-navbar-brand href="#">
+      <span v-if="mainData">{{ mainData.title }}</span>
+      <b-skeleton v-else width="120px" height="28px"></b-skeleton>
+    </b-navbar-brand>
   </b-navbar>
 </template>
 
