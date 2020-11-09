@@ -33,7 +33,7 @@
 
         <side-bar-service :service="{title: mainData['impressum']}"/>
         <side-bar-service :service="{title: mainData['privacy']}"/>
-        <side-bar-service :service="{title: mainData['contact']}"/>
+        <side-bar-service :service="{title: mainData['contact']}" style="margin-bottom: 10vh"/>
 
       </div>
     </b-sidebar>
