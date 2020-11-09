@@ -1,6 +1,6 @@
 {
   "name": "ella",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -11,7 +11,7 @@
     "clean:dist": "del-cli dist*",
     "compileSW": "node --experimental-json-modules src/utilities/compileSW.mjs",
     "zip": "zip-folder dist",
-    "release": "dotenv release-it"
+    "release": "dotenv -e .env.local release-it"
   },
   "dependencies": {
     "@educorvi/vue-json-form": "0.3.3",
