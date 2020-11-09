@@ -28,7 +28,7 @@
           <p class="text-muted mb-0">{{ mainData.description }}</p>
         </div>
       </div>
-      <div style="overflow-y: scroll" v-if="mainData">
+      <div v-if="mainData">
         <side-bar-service v-for="service in mainData.services" :key="service.name" :service="service"/>
 
         <side-bar-service :service="{title: mainData['impressum']}"/>
