@@ -7,7 +7,7 @@
     "build": "npm run compileSW && vue-cli-service build && npm run clean",
     "lint": "vue-cli-service lint",
     "clean": "del-cli sw.js",
-    "compileSW": "node src/utilities/compileSW.mjs",
+    "compileSW": "node --experimental-json-modules src/utilities/compileSW.mjs",
     "zip": "zip-folder dist"
   },
   "dependencies": {
@@ -38,7 +38,8 @@
     "node-sass": "^4.14.1",
     "replace-in-file": "^6.1.0",
     "sass-loader": "^10.0.3",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "wait-on": "^5.2.0"
   },
   "eslintConfig": {
     "root": true,
