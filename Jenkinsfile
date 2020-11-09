@@ -31,7 +31,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'npm run build'
-        sh 'node zip dist'
+        sh 'npm run zip'
         archiveArtifacts 'dist.zip'
       }
     }
