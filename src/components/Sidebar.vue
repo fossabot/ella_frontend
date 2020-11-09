@@ -15,13 +15,12 @@
         </div>
       </template>
 
-      <b-icon-x v-b-toggle:sidebar class="h4 float-left mt-2 ml-2 clickable"/>
-      <div>
+      <div class="sidebarHead">
+        <b-icon-x v-b-toggle:sidebar class="h4 float-left mt-2 ml-2 clickable"/>
         <h4 class="mb-1">{{ mainData.title }}</h4>
         <p class="text-muted mb-0">{{ mainData.description }}</p>
       </div>
-      <hr>
-      <div>
+      <div style="overflow-y: scroll">
         <side-bar-service v-for="service in mainData.services" :key="service.name" :service="service"/>
       </div>
     </b-sidebar>
@@ -42,10 +41,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "src/styles";
 #sidebar {
-  div {
+
+  .sidebarHead {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa;
+    border-bottom-style: solid;
+    border-color: $primary;
     text-align: right;
     padding: 5px 10px;
+
   }
 }
 </style>
