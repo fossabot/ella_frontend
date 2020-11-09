@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>{{ service.title }}</h2>
+    <p class="text-muted">{{service.description}}</p>
     <span v-html="service.text"/>
   </div>
 </template>
