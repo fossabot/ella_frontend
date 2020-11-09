@@ -3,8 +3,11 @@
 </template>
 
 <script>
+import serviceMixin from "@/components/Services/serviceMixin";
+
 export default {
-  name: "Group"
+  name: "Group",
+  mixins: serviceMixin
 }
 </script>
 

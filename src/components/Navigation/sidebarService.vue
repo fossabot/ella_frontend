@@ -7,6 +7,7 @@
       </div>
       <b-collapse v-model="cVisible" v-if="service.type === 'group'">
         <b-card>
+<!--          TODO: Subservices vollwertig mit einbinden-->
           <side-bar-service v-for="(subService, index) in service.services.map(obj=>{return {title: obj, name: obj}})"
                             :key="subService.title" :service="subService"
                             :no-divider="index === service.services.length-1"></side-bar-service>

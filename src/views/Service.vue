@@ -1,5 +1,5 @@
 <template>
-  <component :is="component"/>
+  <component :service="service" :is="component"/>
 </template>
 
 <script>
