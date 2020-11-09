@@ -10,7 +10,8 @@
     "clean:sw": "del-cli sw.js",
     "clean:dist": "del-cli dist*",
     "compileSW": "node --experimental-json-modules src/utilities/compileSW.mjs",
-    "zip": "zip-folder dist"
+    "zip": "zip-folder dist",
+    "release": "dotenv release-it"
   },
   "dependencies": {
     "@educorvi/vue-json-form": "0.3.3",
@@ -38,6 +39,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.14.1",
+    "release-it": "^14.2.1",
     "replace-in-file": "^6.1.0",
     "sass-loader": "^10.0.3",
     "vue-template-compiler": "^2.6.11",
