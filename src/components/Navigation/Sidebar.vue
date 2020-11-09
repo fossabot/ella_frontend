@@ -42,7 +42,7 @@
 
 <script>
 import {mapGetters} from "vuex"
-import SideBarService from "@/components/sidebarService";
+import SideBarService from "@/components/Navigation/sidebarService";
 
 export default {
   name: "Sidebar",
@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "src/styles";
+@import "../../styles";
 
 #sidebar {
 

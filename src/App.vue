@@ -15,10 +15,10 @@
 </template>
 
 <script>
-import NavBarComp from "@/components/NavBarComp";
+import NavBarComp from "@/components/Navigation/NavBarComp";
 import {mapGetters} from "vuex";
 import CustomSpinner from "@/components/CustomSpinner";
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "@/components/Navigation/Sidebar";
 export default {
   name: 'App',
   components: {
@@ -56,7 +56,7 @@ export default {
 .main {
   max-width: 900px;
   padding: 8px 12px;
-  text-align: center;
+  //text-align: center;
 }
 
 .hider {

@@ -7,7 +7,7 @@
       </div>
       <b-collapse v-model="cVisible" v-if="service.type === 'group'">
         <b-card>
-          <side-bar-service v-for="(subService, index) in service.services.map(obj=>{return {title: obj}})"
+          <side-bar-service v-for="(subService, index) in service.services.map(obj=>{return {title: obj, name: obj}})"
                             :key="subService.title" :service="subService"
                             :no-divider="index === service.services.length-1"></side-bar-service>
         </b-card>
@@ -39,6 +39,8 @@ export default {
     action() {
       if (this.service.type === 'group') {
         this.cVisible = !this.cVisible;
+      } else {
+        this.$router.push('/services/' +this.service.name);
       }
     }
   },
