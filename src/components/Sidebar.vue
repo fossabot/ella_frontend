@@ -7,21 +7,34 @@
         right
         no-header>
 
-      <template #footer="{}">
-        <div class="bg-dark text-light align-items-center px-3 py-2">
-          <p>Impressum</p>
-          <p>Datenschutz</p>
-          <p>Kontakt</p>
-        </div>
-      </template>
+      <!--      <template #footer="{}">-->
+      <!--        <b-row style="background-color: grey; max-width: 100% !important;">-->
+      <!--          <b-col>-->
+      <!--            Impressum-->
+      <!--          </b-col>-->
+      <!--          <b-col>-->
+      <!--            Impressum-->
+      <!--          </b-col>-->
+      <!--          <b-col>-->
+      <!--            Impressum-->
+      <!--          </b-col>-->
+      <!--        </b-row>-->
+      <!--      </template>-->
 
       <div class="sidebarHead">
         <b-icon-x v-b-toggle:sidebar class="h4 float-left mt-2 ml-2 clickable"/>
-        <h4 class="mb-1">{{ mainData.title }}</h4>
-        <p class="text-muted mb-0">{{ mainData.description }}</p>
+        <div v-if="mainData">
+          <h4 class="mb-1">{{ mainData.title }}</h4>
+          <p class="text-muted mb-0">{{ mainData.description }}</p>
+        </div>
       </div>
-      <div style="overflow-y: scroll">
+      <div style="overflow-y: scroll" v-if="mainData">
         <side-bar-service v-for="service in mainData.services" :key="service.name" :service="service"/>
+
+        <side-bar-service :service="{title: mainData['impressum']}"/>
+        <side-bar-service :service="{title: mainData['privacy']}"/>
+        <side-bar-service :service="{title: mainData['contact']}"/>
+
       </div>
     </b-sidebar>
   </div>
@@ -37,11 +50,15 @@ export default {
   computed: {
     ...mapGetters(["mainData"])
   },
+  data() {
+    return {}
+  },
 }
 </script>
 
 <style scoped lang="scss">
 @import "src/styles";
+
 #sidebar {
 
   .sidebarHead {
