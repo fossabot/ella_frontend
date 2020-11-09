@@ -7,11 +7,15 @@ import {mapGetters} from "vuex";
 import Page from "../components/Services/Page"
 import Form from "@/components/Services/Form";
 import Group from "@/components/Services/Group";
+import notFound from "@/views/404"
 
 export default {
   name: "Service",
   computed: {
     component() {
+      if (!this.service) {
+        return notFound;
+      }
       switch (this.service.type) {
         case 'page':
           return Page;
@@ -20,7 +24,7 @@ export default {
         case 'group':
           return Group;
         default:
-          return null;
+          return notFound;
       }
     },
     service() {
