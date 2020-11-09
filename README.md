@@ -1,5 +1,5 @@
 # ella
-
+[![Build Status](https://jenkins.jp-studios.de/job/ella_frontend/job/master/badge/icon)](https://jenkins.jp-studios.de/blue/organizations/jenkins/ella_frontend/branches/)
 ## Project setup
 ```
 npm install
