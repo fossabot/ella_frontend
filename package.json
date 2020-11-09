@@ -7,9 +7,11 @@
     "build": "npm run compileSW && vue-cli-service build && npm run clean",
     "lint": "vue-cli-service lint",
     "clean": "del-cli sw.js",
-    "compileSW": "node src/utilities/compileSW.mjs"
+    "compileSW": "node src/utilities/compileSW.mjs",
+    "zip": "zip-folder dist"
   },
   "dependencies": {
+    "@educorvi/vue-json-form": "0.3.3",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.17.3",
@@ -21,6 +23,7 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@neferin/zip-folder": "^1.0.4",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-pwa": "^4.5.7",
