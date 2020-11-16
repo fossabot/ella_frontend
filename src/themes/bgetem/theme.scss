@@ -1,0 +1,37 @@
+@font-face {
+  font-family: 'DGUV';
+  src: url("~@/themes/bgetem/DGUVMeta-Normal.woff") format("woff");
+  src: url("~@/themes/bgetem/DGUVMeta-Normal.otf") format("opentype");
+}
+
+#root {
+  font-family: DGUV, sans-serif !important;
+}
+
+.main {
+  @extend .card;
+  margin: 15px;
+  width: 90%;
+  z-index: 0 !important;
+}
+
+html {
+  background-color: $primary;
+}
+
+body {
+  background-color: transparent;
+}
+
+#top {
+  background-color: white !important;
+  color: black !important;
+
+  * {
+    color: black !important;
+  }
+
+  #logo{
+    content: url("~@/assets/logo_bg.png");
+  }
+}

@@ -1,8 +1,9 @@
 <template>
   <b-navbar id="navbar" :type="isLightColor?'light':'dark'" class="navbarCustom" variant="primary">
     <b-navbar-brand to="/">
-      <span v-if="mainData">{{ mainData.title }}</span>
-      <b-skeleton v-else width="120px" height="28px"></b-skeleton>
+      <img src="@/assets/logo.png" alt="Logo" id="logo"/>
+      <span class="title-text" v-if="mainData">{{ mainData.title }}</span>
+      <b-skeleton class="title-text" v-else width="120px" height="28px"></b-skeleton>
     </b-navbar-brand>
     <b-navbar-nav class="ml-auto">
       <b-button id="sidebarbutton" variant="light" v-b-toggle:sidebar class="float-right"><b-icon-justify/></b-button>
@@ -31,5 +32,9 @@ export default {
 <style lang="scss" scoped>
 .navbarCustom {
   box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+}
+#logo {
+  height: 40px;
+  margin-right: 25px;
 }
 </style>

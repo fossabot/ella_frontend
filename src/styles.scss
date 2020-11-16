@@ -1,39 +1,85 @@
-#navbar {
-  //background: white !important;
+@function set-text-color($color) {
+  @if (lightness( $color ) > 40) {
+    @return black;
+  } @else {
+    @return white;
+  }
 }
 
-::selection {
-  background-color: $primary !important;
+@if $primary!=#fff {
+  ::-moz-selection {
+    color: set-text-color($primary);
+    background-color: $primary !important;
+  }
+
+  ::selection {
+    color: set-text-color($primary);
+    background-color: $primary !important;
+  }
 }
+
 $border-radius-scroll: 0px;
-  ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-  }
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
 
 
-  ::-webkit-scrollbar-track {
-    border-radius: $border-radius-scroll !important;
-    background-color: transparent !important;
-  }
+::-webkit-scrollbar-track {
+  border-radius: $border-radius-scroll !important;
+  background-color: transparent !important;
+}
 
 
-  ::-webkit-scrollbar-thumb {
-    background: $primary !important;
-    border-radius: $border-radius-scroll !important;
-  }
+::-webkit-scrollbar-thumb {
+  background: $primary !important;
+  border-radius: $border-radius-scroll !important;
+}
 
 body {
   padding: 0;
   margin: 0;
 }
 
+#top {
+  z-index: 1000 !important;
+}
+
 .clickable {
   cursor: pointer;
 }
 
+#logo {
 
+}
+
+
+
+/**
+  Bootswatch Variables Import
+ */
+//@import "~bootswatch/dist/superhero/variables";
+
+/**
+  Custom Variables Import
+ */
+//@import "themes/bgetem/variables";
+
+
+
+//Bootstrap Import
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import 'node_modules/bootstrap-vue/src/index.scss';
 
+
+
+/**
+  Bootswatch Theme Import
+ */
+//@import "~bootswatch/dist/superhero/bootswatch";
+
+/**
+  Custom Theme Import
+ */
+//@import "./themes/bgetem/theme";
 

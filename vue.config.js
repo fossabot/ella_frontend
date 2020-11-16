@@ -36,7 +36,7 @@ module.exports = {
     css: {
         loaderOptions: {
             sass: {
-                additionalData: '$primary: ' + process.env.VUE_APP_THEME_COLOR+";"
+                additionalData: process.env.VUE_APP_THEME_COLOR ? '$primary: ' + process.env.VUE_APP_THEME_COLOR + ";" : ""
             },
         },
     },

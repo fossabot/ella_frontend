@@ -1,5 +1,5 @@
 <template>
-<b-jumbotron bg-variant="primary" :text-variant="isLightColor?'dark':'light'" header="404" lead="Diese Seite wurde leider nicht gefunden...">
+<b-jumbotron bg-variant="secondary" :text-variant="isLightColor?'dark':'light'" header="404" lead="Diese Seite wurde leider nicht gefunden...">
 <router-link style="color: inherit" to="/">Zurück zur Startseite</router-link>
 </b-jumbotron>
 </template>

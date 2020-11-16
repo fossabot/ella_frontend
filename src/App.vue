@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div id="root" class="box">
     <nav-bar-comp id="top" class="topbar"/>
     <div id="app" class="main" v-if="mainData">
       <div style="max-width: 800px;">

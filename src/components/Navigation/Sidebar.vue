@@ -64,7 +64,7 @@ export default {
   .sidebarHead {
     position: sticky;
     top: 0;
-    background-color: #f8f9fa;
+    //background-color: #f8f9fa;
     border-bottom-style: solid;
     border-color: $primary;
     text-align: right;
