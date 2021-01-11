@@ -1,5 +1,5 @@
 <template>
-  <json-form :json="service.form"></json-form>
+  <json-form :json="service.form" :ui="service.ui"></json-form>
 </template>
 
 <script>
