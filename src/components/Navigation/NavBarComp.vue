@@ -3,7 +3,6 @@
     <b-navbar-brand to="/">
       <img src="@/assets/logo.png" alt="Logo" id="logo"/>
       <span class="title-text" v-if="mainData">{{ mainData.title }}</span>
-      <b-skeleton class="title-text" v-else width="120px" height="28px"></b-skeleton>
     </b-navbar-brand>
     <b-navbar-nav class="ml-auto">
       <b-button id="sidebarbutton" variant="light" v-b-toggle:sidebar class="float-right"><b-icon-justify/></b-button>

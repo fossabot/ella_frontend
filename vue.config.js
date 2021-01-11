@@ -15,9 +15,9 @@ module.exports = {
         ]
     },
     pwa: {
-        name: process.env.TITLE,
-        themeColor: process.env.THEME_COLOR,
-        msTileColor: process.env.THEME_COLOR,
+        name: process.env.VUE_APP_TITLE,
+        themeColor: process.env.VUE_APP_THEME_COLOR,
+        msTileColor: process.env.VUE_APP_THEME_COLOR,
         appleMobileWebAppCapable: 'yes',
         appleMobileWebAppStatusBarStyle: 'black',
 
