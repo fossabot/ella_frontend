@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import {isLightColor, getBootstrapVariable} from "@/utilities/globals";
+import {isLightColor, getCSSVariable} from "@/utilities/globals";
 
 export default {
 name: "404",
   computed: {
     isLightColor() {
-      return isLightColor(getBootstrapVariable('secondary'));
+      return isLightColor(getCSSVariable('secondary'));
     }
   },
 }

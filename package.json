@@ -13,7 +13,8 @@
     "compileSW": "node --experimental-json-modules src/utilities/compileSW.mjs",
     "generateIcons": "npx vue-pwa-asset-generator --no-manifest -a ./src/assets/logo.png -o ./public/img/icons && cp ./public/img/icons/favicon-32x32.png public/favicon.png",
     "zip": "zip-folder dist",
-    "release": "dotenv -e .env.local release-it"
+    "release": "dotenv -e .env.local release-it",
+    "doc": "node_modules/.bin/jsdoc -c jsdoc.json -R README.md"
   },
   "dependencies": {
     "@educorvi/vue-json-form": "^1.0.1",
@@ -38,9 +39,11 @@
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
     "del-cli": "^3.0.1",
+    "docdash": "^1.2.0",
     "dotenv-cli": "^4.0.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "jsdoc": "^3.6.6",
     "node-sass": "^4.14.1",
     "release-it": "^14.2.1",
     "replace-in-file": "^6.1.0",

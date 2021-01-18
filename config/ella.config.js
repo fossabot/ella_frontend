@@ -1,4 +1,10 @@
 /**
+ * Einstellungen der Ella App
+ * @module config
+ */
+
+
+/**
  * Enum der Auswahlmöglichkeiten für {@link NAVBAR_STYLE}
  * @enum {string}
  * @readonly
@@ -37,13 +43,13 @@ const INSTANCE_ID = "ella_example_simple";
  * Wird für die PWA und für die Tabübersicht des Browsers genutzt
  * @type string
  */
-const TITLE = "TrElla";
+const TITLE = "Ella";
 
 /**
  * Hauptfarbe der Anwendung, ersetzt unter anderem die Bootstraps $primary Variable
  * @type string
  */
-const THEME_COLOR = "#002d75"
+const THEME_COLOR = "#fff600"
 
 /**
  * Wählt die Variante der Navigationsleiste.
