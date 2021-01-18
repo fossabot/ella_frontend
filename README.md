@@ -8,12 +8,11 @@ npm install
 ```
 
 ### Configuration
-Bearbeiten der Datei `config/ella.config.js`:
-- Titel der App (verwendet für ServiceWorker und Tableiste): ``TITLE``
-- URL des API-Roots: ``API_ROOT_URL``
-- ID der Instanz: ``INSTANCE_ID``
-- Theme Color (Hauptfarbe der Anwendung, ersetzt unter anderem Bootstraps $primary Variable): ``THEME_COLOR``
-- Für alle Einstellungen siehe [in der Dokumentation](https://educorvi.github.io/ella_frontend/module-config.html) oder in der Datei selbst
+#### Grundeinstellungen
+Die Grundeinstellungen können auf zwei Weisen festgelegt werden. Entweder durch den Konfigurator, der automatisch während des Installationsprozesses startet, oder durch Kopieren der Datei `config/ella.config.example.js` nach `config/ella.config.js` und anschließendes manuelles Bearbeiten der letzteren Datei.
+[Hier mehr Details zu den Einstellungen](https://educorvi.github.io/ella_frontend/module-config.html).  
+Der Konfigurator kann durch Löschen von `config/ella.config.js` und anschließendes Ausführen von `npm run createSettings` neu gestartet werden.  
+Ein Beispiel befindet sich in `config/ella.config.example.js`.
   
 Änderung des Logos
 - Das Logo kann ersetzt werden, indem man die Datei ``src/assets/logo.png`` überschreibt. Das Bild sollte mindestens 512x512 Pixel groß sein.
