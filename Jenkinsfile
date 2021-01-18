@@ -39,6 +39,6 @@ pipeline {
   }
   environment {
     HOME = '.'
-    JENKINS = True
+    JENKINS = 'true'
   }
 }
