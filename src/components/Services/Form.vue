@@ -35,7 +35,6 @@ export default {
     },
     onSubmit(data) {
       this.$set(this.doing, this.indexOfAction, true);
-      console.log(data);
       axios({
         method: this.service["formactions"][this.indexOfAction].method.toLowerCase(),
         url: normURLS(API_ROOT_URL) + '/' + INSTANCE_ID + "/" + this.service.name + "/" + this.service["formactions"][this.indexOfAction].name,

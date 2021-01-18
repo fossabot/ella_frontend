@@ -3,9 +3,11 @@
   "version": "0.4.0",
   "private": true,
   "scripts": {
+    "postinstall": "npm run createSettings",
     "serve": "vue-cli-service serve",
-    "build": "npm run compileSW && npm run build:dist && npm run clean:sw",
-    "build:dist": "vue-cli-service build",
+    "prebuild": "npm run compileSW",
+    "build": "vue-cli-service build",
+    "postbuild": " npm run clean:sw",
     "lint": "vue-cli-service lint",
     "clean": "npm run clean:sw && npm run clean:dist",
     "clean:sw": "del-cli service-worker.js",
@@ -14,7 +16,8 @@
     "generateIcons": "npx vue-pwa-asset-generator --no-manifest -a ./src/assets/logo.png -o ./public/img/icons && cp ./public/img/icons/favicon-32x32.png public/favicon.png",
     "zip": "zip-folder dist",
     "release": "dotenv -e .env.local release-it",
-    "doc": "node_modules/.bin/jsdoc -c jsdoc.json -R README.md"
+    "doc": "node_modules/.bin/jsdoc -c jsdoc.json -R README.md",
+    "createSettings": "node config/createSettings.js"
   },
   "dependencies": {
     "@educorvi/vue-json-form": "^1.0.1",
@@ -48,6 +51,7 @@
     "release-it": "^14.2.1",
     "replace-in-file": "^6.1.0",
     "sass-loader": "^10.0.3",
+    "terminal-kit": "^1.45.4",
     "vue-template-compiler": "^2.6.11",
     "wait-on": "^5.2.0"
   },
