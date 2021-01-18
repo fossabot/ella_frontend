@@ -2,7 +2,11 @@
   <json-form :json="service.form" :ui="service.ui" :onSubmit="onSubmit">
     <div style="width: 100%; display: flex; justify-content: center">
       <b-button-group class="w-100">
-        <b-button type="submit" v-for="(action, index) in service.formactions" :key="action.name" @click="selected(index)" :variant="action.cssclass">{{action.title}}</b-button>
+        <b-button type="submit" v-for="(action, index) in service['formactions']" :key="action.name"
+                  :disabled="doing[index]"
+                  @click="selected(index)" :variant="action['cssclass']">
+          <b-spinner class="m-0" style="width: 1.25rem; height: 1.25rem" v-if="doing[index]"/>
+          <span v-else>{{ action.title }}</span></b-button>
       </b-button-group>
     </div>
   </json-form>
@@ -18,7 +22,8 @@ export default {
   name: "Form",
   data() {
     return {
-      indexOfAction: 0
+      indexOfAction: 0,
+      doing: []
     }
   },
   mixins: [serviceMixin],
@@ -28,6 +33,7 @@ export default {
       this.indexOfAction = index;
     },
     onSubmit(data) {
+      this.$set(this.doing, this.indexOfAction, true);
       console.log(data);
       axios({
         method: this.service["formactions"][this.indexOfAction].method.toLowerCase(),
@@ -35,8 +41,16 @@ export default {
         data: data
       }).then(res => {
         console.log(res);
-      });
+      }).catch(err => {
+        this.$bvToast.toast("Es gab einen Fehler beim Ausführen dieser Aktion! Bitte versuchen Sie es später erneut.", {
+          title: "Fehler",
+          variant: "danger"
+        });
+        console.error(err);
+      }).finally(() => this.$set(this.doing, this.indexOfAction, false));
     }
+
+
   },
 }
 </script>

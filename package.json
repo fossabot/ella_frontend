@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "npm run compileSW && npm run generateIcons && npm run build:dist && npm run clean:sw",
+    "build": "npm run compileSW && npm run build:dist && npm run clean:sw",
     "build:dist": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "clean": "npm run clean:sw && npm run clean:dist",
