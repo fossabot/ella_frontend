@@ -3,8 +3,8 @@ pipeline {
     docker {
       image 'node'
     }
-
   }
+
   stages {
     stage('Prebuilt') {
       parallel {
@@ -39,5 +39,6 @@ pipeline {
   }
   environment {
     HOME = '.'
+    JENKINS = True
   }
 }

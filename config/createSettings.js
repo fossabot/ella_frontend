@@ -5,6 +5,11 @@ const waitOn = require("wait-on")
 
 const file = "config/ella.config.js";
 
+if (process.env.JENKINS) {
+    fs.copyFileSync("config/ella.config.example.js", file);
+    process.exit(0);
+}
+
 async function configure() {
     const opts = {resources: ["config/ella.config.js"]};
 
