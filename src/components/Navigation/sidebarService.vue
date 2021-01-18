@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import {isLightColor} from "@/utilities/globals";
+import {isLightColor} from "@/utilities/globals.mjs";
 import {THEME_COLOR} from "../../../config";
 
 export default {

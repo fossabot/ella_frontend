@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import {isLightColor} from "@/utilities/globals";
+import {isLightColor} from "@/utilities/globals.mjs";
 import {THEME_COLOR, NAVBAR_VARIANTS, NAVBAR_STYLE} from "../../../config";
 import {mapGetters} from "vuex";
 

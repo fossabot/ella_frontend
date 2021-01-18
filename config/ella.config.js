@@ -49,7 +49,7 @@ const TITLE = "Ella";
  * Hauptfarbe der Anwendung, ersetzt unter anderem die Bootstraps $primary Variable
  * @type string
  */
-const THEME_COLOR = "#fff600"
+const THEME_COLOR = "#002d75"
 
 /**
  * Wählt die Variante der Navigationsleiste.

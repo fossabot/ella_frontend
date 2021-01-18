@@ -4,7 +4,7 @@
   },
   "source": {
     "include": ["config"],
-    "includePattern": "\\.js$",
+    "includePattern": "\\.(m?)js$",
     "excludePattern": "(node_modules/|docs)"
   },
   "plugins": [

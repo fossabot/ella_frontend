@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {isLightColor, getCSSVariable} from "@/utilities/globals";
+import {isLightColor, getCSSVariable} from "@/utilities/globals.mjs";
 
 export default {
 name: "404",

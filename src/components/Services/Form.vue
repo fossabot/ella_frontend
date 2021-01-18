@@ -16,7 +16,7 @@
 import jsonForm from "@educorvi/vue-json-form"
 import serviceMixin from "@/components/Services/serviceMixin";
 import axios from "axios";
-import {normURLS} from "@/utilities/globals.js";
+import {normURLS} from "@/utilities/globals.mjs";
 import {API_ROOT_URL, INSTANCE_ID} from "../../../config";
 
 export default {
