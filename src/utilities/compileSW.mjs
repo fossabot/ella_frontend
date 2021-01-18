@@ -24,11 +24,11 @@ async function compile() {
     }));
 
     await waitOn(opts);
-    if (!TITLE) throwError("VUE_APP_TITLE");
+    if (!TITLE) throwError("TITLE");
     await replace({files: file, from: /%TITLE%/g, to: TITLE.toLowerCase().replace(/ /g, "_")});
 
     await waitOn(opts);
-    if (!API_ROOT_URL) throwError("VUE_APP_API_ROOT_URL");
+    if (!API_ROOT_URL) throwError("ROOT_URL");
     await replace({files: file, from: /%ROOT%/g, to: normURLS(API_ROOT_URL)})
 
 

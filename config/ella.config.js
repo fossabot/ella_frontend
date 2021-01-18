@@ -55,7 +55,7 @@ const THEME_COLOR = "#002d75"
  * Wählt die Variante der Navigationsleiste.
  * @type {NAVBAR_VARIANTS}
  */
-const NAVBAR_STYLE = NAVBAR_VARIANTS.LOGO
+const NAVBAR_STYLE = NAVBAR_VARIANTS.LOGO_AND_NAME
 
 
 

@@ -14,7 +14,7 @@ export default new Vuex.Store({
         getMainData(state) {
             axios.get(normURLS(API_ROOT_URL) + '/' + INSTANCE_ID).then(res => {
                 state.mainData = res.data;
-            });
+            }).catch(error => state.mainData = {error});
         }
     },
     actions: {},

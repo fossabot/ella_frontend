@@ -1,13 +1,20 @@
 <template>
   <div id="root" class="box">
     <nav-bar-comp id="top" class="topbar"/>
-    <div id="app" class="main" v-if="mainData">
+    <div id="app" class="main" v-if="mainData && !mainData.error">
       <div style="max-width: 800px;">
         <router-view/>
       </div>
     </div>
-    <div v-else class="hider">
+    <div v-else-if="!(mainData && mainData.error)" class="hider">
       <custom-spinner class="mt-2"/>
+    </div>
+    <div class="mt-5 w-75" v-else>
+      <b-jumbotron bg-variant="danger" :text-variant="textVariant">
+        <template #header>Fehler!</template>
+        <template #lead>Bitte versuchen Sie es später erneut!</template>
+        ({{mainData.error}})
+      </b-jumbotron>
     </div>
 
     <sidebar/>
@@ -20,6 +27,8 @@ import {mapGetters} from "vuex";
 import CustomSpinner from "@/components/CustomSpinner";
 import Sidebar from "@/components/Navigation/Sidebar";
 import {TITLE, THEME_COLOR} from "../config"
+import {isLightColor, getCSSVariable} from "@/utilities/globals.mjs";
+
 export default {
   name: 'App',
   components: {
@@ -36,6 +45,9 @@ export default {
     metaThemeColor.setAttribute("content", THEME_COLOR);
   },
   computed: {
+    textVariant() {
+      return isLightColor(getCSSVariable("danger")) ? 'dark' : 'light';
+    },
     ...mapGetters(["mainData"])
   },
 }

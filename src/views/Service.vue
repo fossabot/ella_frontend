@@ -4,27 +4,23 @@
 
 <script>
 import {mapGetters} from "vuex";
-import Page from "../components/Services/Page"
-import Form from "@/components/Services/Form";
-import Group from "@/components/Services/Group";
-import notFound from "@/views/404"
 
 export default {
   name: "Service",
   computed: {
     component() {
       if (!this.service) {
-        return notFound;
+        return () => import("../views/404");
       }
       switch (this.service.type) {
         case 'page':
-          return Page;
+          return () => import("../components/Services/Page");
         case 'service':
-          return Form;
+          return () => import("../components/Services/Form");
         case 'group':
-          return Group;
+          return () => import("../components/Services/Group");
         default:
-          return notFound;
+          return () => import("../views/404");
       }
     },
     service() {

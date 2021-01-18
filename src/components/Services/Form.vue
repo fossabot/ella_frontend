@@ -39,7 +39,9 @@ export default {
       axios({
         method: this.service["formactions"][this.indexOfAction].method.toLowerCase(),
         url: normURLS(API_ROOT_URL) + '/' + INSTANCE_ID + "/" + this.service.name + "/" + this.service["formactions"][this.indexOfAction].name,
-        data: data
+        data: {
+          form: data
+        }
       }).then(res => {
         console.log(res);
       }).catch(err => {

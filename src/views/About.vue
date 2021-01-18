@@ -1,5 +1,16 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>Ella</h1>
+    <h2>v{{version}}</h2>
   </div>
 </template>
+<script>
+export default {
+  name:"About",
+  computed: {
+    version() {
+      return process.env.PACKAGE_VERSION;
+    }
+  }
+}
+</script>
