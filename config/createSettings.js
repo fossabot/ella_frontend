@@ -68,7 +68,6 @@ async function configure() {
                 replace({files: file, from: /"%NAVBAR_STYLE%"/g, to: "NAVBAR_VARIANTS.LOGO_AND_NAME"});
                 break;
         }
-        term.eraseLine();
         term.green("\nKonfiguration abgeschlossen\n");
         process.exit(0);
     });
