@@ -8,7 +8,7 @@
     "build:dist": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "clean": "npm run clean:sw && npm run clean:dist",
-    "clean:sw": "del-cli sw.js",
+    "clean:sw": "del-cli service-worker.js",
     "clean:dist": "del-cli dist*",
     "compileSW": "node --experimental-json-modules src/utilities/compileSW.mjs",
     "generateIcons": "npx vue-pwa-asset-generator --no-manifest -a ./src/assets/logo.png -o ./public/img/icons && cp ./public/img/icons/favicon-32x32.png public/favicon.png",

@@ -5,7 +5,7 @@ import {normURLS} from "./globals.mjs";
 import packageJson from "../../package.json";
 import waitOn from "wait-on"
 
-const opts = {resources: ["sw.js"]};
+const opts = {resources: ["service-worker.js"]};
 
 dotenv.config();
 
@@ -14,7 +14,7 @@ function throwError(property) {
 }
 
 async function compile() {
-    const file = './sw.js';
+    const file = './service-worker.js';
     await fs.copyFile('./src/utilities/sw.empty.js', file, (err => {
         if (err) {
             throw err;
