@@ -8,12 +8,15 @@ npm install
 ```
 
 ### Configuration
-Bearbeiten der Datei `.env`:
-- Titel der App (verwendet für ServiceWorker und Tableiste): ``VUE_APP_TITLE``
-- URL des API-Roots: ``VUE_APP_API_ROOT_URL``
-- ID der Instanz: ``VUE_APP_INSTANCE_ID``
-- Theme Color (Hauptfarbe der Anwendung, ersetzt unter anderem Bootstraps $primary Variable): ``VUE_APP_THEME_COLOR``
-- Gegebenenfalls das Logo ersetzen, indem man die Datei ``src/assets/logo.png`` überschreibt. Das Bild sollte mindestens 512x512 Pixel groß sein.
+Bearbeiten der Datei `config/ella.config.js`:
+- Titel der App (verwendet für ServiceWorker und Tableiste): ``TITLE``
+- URL des API-Roots: ``API_ROOT_URL``
+- ID der Instanz: ``INSTANCE_ID``
+- Theme Color (Hauptfarbe der Anwendung, ersetzt unter anderem Bootstraps $primary Variable): ``THEME_COLOR``
+- Für alle Einstellungen siehe Dokumentation in der Datei selbst
+  
+Änderung des Logos
+- Das Logo kann ersetzt werden, indem man die Datei ``src/assets/logo.png`` überschreibt. Das Bild sollte mindestens 512x512 Pixel groß sein.
 - Sollte das Logo ersetzt worden sein, muss anschließend der Befehl ``npm run generateIcons`` ausgeführt werden, um die benötigten Icons aus dem Logo zu generieren.
 
 Bearbeiten der Datei ``src/styles.scss``:  

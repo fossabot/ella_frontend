@@ -17,6 +17,7 @@ import jsonForm from "@educorvi/vue-json-form"
 import serviceMixin from "@/components/Services/serviceMixin";
 import axios from "axios";
 import {normURLS} from "@/utilities/globals.mjs";
+import {API_ROOT_URL, INSTANCE_ID} from "../../../config";
 
 export default {
   name: "Form",
@@ -37,7 +38,7 @@ export default {
       console.log(data);
       axios({
         method: this.service["formactions"][this.indexOfAction].method.toLowerCase(),
-        url: normURLS(process.env.VUE_APP_API_ROOT_URL) + '/' + process.env.VUE_APP_INSTANCE_ID + "/" + this.service.name + "/" + this.service["formactions"][this.indexOfAction].name,
+        url: normURLS(API_ROOT_URL) + '/' + INSTANCE_ID + "/" + this.service.name + "/" + this.service["formactions"][this.indexOfAction].name,
         data: data
       }).then(res => {
         console.log(res);

@@ -3,6 +3,7 @@ const fs = require('fs');
 const packageJson = fs.readFileSync('./package.json');
 const version = JSON.parse(packageJson).version || 0;
 require('dotenv').config();
+const {TITLE, THEME_COLOR} = require("./config/ella.config.js");
 
 module.exports = {
     configureWebpack: {
@@ -15,9 +16,9 @@ module.exports = {
         ]
     },
     pwa: {
-        name: process.env.VUE_APP_TITLE,
-        themeColor: process.env.VUE_APP_THEME_COLOR,
-        msTileColor: process.env.VUE_APP_THEME_COLOR,
+        name: TITLE,
+        themeColor: THEME_COLOR,
+        msTileColor: THEME_COLOR,
         appleMobileWebAppCapable: 'yes',
         appleMobileWebAppStatusBarStyle: 'black',
 
@@ -36,7 +37,7 @@ module.exports = {
     css: {
         loaderOptions: {
             sass: {
-                additionalData: process.env.VUE_APP_THEME_COLOR ? '$primary: ' + process.env.VUE_APP_THEME_COLOR + ";" : ""
+                additionalData: THEME_COLOR ? '$primary: ' + THEME_COLOR + ";" : ""
             },
         },
     },

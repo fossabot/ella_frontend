@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import {isLightColor} from "@/utilities/globals";
+import {isLightColor, getBootstrapVariable} from "@/utilities/globals";
 
 export default {
 name: "404",
   computed: {
     isLightColor() {
-      return isLightColor(process.env.VUE_APP_THEME_COLOR);
+      return isLightColor(getBootstrapVariable('secondary'));
     }
   },
 }

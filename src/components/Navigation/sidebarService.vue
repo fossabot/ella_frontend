@@ -8,9 +8,9 @@
       <b-collapse v-model="cVisible" v-if="service.type === 'group'">
         <b-card no-body class="mr-2 ml-2">
 <!--          TODO: Subservices vollwertig mit einbinden-->
-          <side-bar-service v-for="(subService, index) in service.services.map(obj=>{return {title: obj, name: obj}})"
+          <side-bar-service v-for="(subService, index) in service['services'].map(obj=>{return {title: obj, name: obj}})"
                             :key="subService.title" :service="subService"
-                            :no-divider="index === service.services.length-1"></side-bar-service>
+                            :no-divider="index === service['services'].length-1"></side-bar-service>
         </b-card>
       </b-collapse>
     </div>
@@ -20,6 +20,7 @@
 
 <script>
 import {isLightColor} from "@/utilities/globals";
+import {THEME_COLOR} from "../../../config";
 
 export default {
   name: "sideBarService",
@@ -40,10 +41,10 @@ export default {
   },
   computed: {
     isActive() {
-      return this.$route.name === 'Service' && this.$route.params.service === this.service.name
+      return this.$route.name === 'Service' && this.$route.params.service === this.service.name;
     },
     isLightColor() {
-      return isLightColor(process.env.VUE_APP_THEME_COLOR);
+      return isLightColor(THEME_COLOR);
     }
   },
   methods: {

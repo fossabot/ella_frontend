@@ -1,8 +1,8 @@
 <template>
   <b-navbar id="navbar" :type="isLightColor?'light':'dark'" class="navbarCustom" variant="primary">
     <b-navbar-brand to="/">
-      <img src="@/assets/logo.png" alt="Logo" id="logo"/>
-      <span class="title-text" v-if="mainData">{{ mainData.title }}</span>
+      <img src="@/assets/logo.png" alt="Logo" id="logo" v-if="img"/>
+      <span class="title-text" v-if="mainData && txt">{{ mainData.title }}</span>
     </b-navbar-brand>
     <b-navbar-nav class="ml-auto">
       <b-button id="sidebarbutton" variant="light" v-b-toggle:sidebar class="float-right"><b-icon-justify/></b-button>
@@ -12,19 +12,24 @@
 
 <script>
 import {isLightColor} from "@/utilities/globals";
+import {THEME_COLOR, NAVBAR_VARIANTS, NAVBAR_STYLE} from "../../../config";
 import {mapGetters} from "vuex";
 
 export default {
   name: "NavBarComp",
   computed: {
     isLightColor() {
-      return isLightColor(process.env.VUE_APP_THEME_COLOR);
+      return isLightColor(THEME_COLOR);
     },
-    env() {
-      return process.env;
+    img() {
+      return NAVBAR_STYLE !== NAVBAR_VARIANTS.NAME;
     },
-    ...mapGetters(["mainData"])
-  },
+    txt() {
+      return NAVBAR_STYLE !== NAVBAR_VARIANTS.LOGO;
+    },
+    ...mapGetters(["mainData"]),
+
+  }
 }
 </script>
 

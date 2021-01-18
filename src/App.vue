@@ -19,6 +19,7 @@ import NavBarComp from "@/components/Navigation/NavBarComp";
 import {mapGetters} from "vuex";
 import CustomSpinner from "@/components/CustomSpinner";
 import Sidebar from "@/components/Navigation/Sidebar";
+import {TITLE, THEME_COLOR} from "../config"
 export default {
   name: 'App',
   components: {
@@ -27,8 +28,12 @@ export default {
     NavBarComp
   },
   created() {
-    console.log(process.env.VUE_APP_API_ROOT_URL);
     this.$store.commit("getMainData");
+
+    document.title = TITLE;
+
+    const metaThemeColor = document.querySelector("meta[name=theme-color]");
+    metaThemeColor.setAttribute("content", THEME_COLOR);
   },
   computed: {
     ...mapGetters(["mainData"])
