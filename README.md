@@ -13,7 +13,7 @@ Bearbeiten der Datei `config/ella.config.js`:
 - URL des API-Roots: ``API_ROOT_URL``
 - ID der Instanz: ``INSTANCE_ID``
 - Theme Color (Hauptfarbe der Anwendung, ersetzt unter anderem Bootstraps $primary Variable): ``THEME_COLOR``
-- Für alle Einstellungen siehe Dokumentation in der Datei selbst
+- Für alle Einstellungen siehe [in der Dokumentation](https://educorvi.github.io/ella_frontend/module-config.html) oder in der Datei selbst
   
 Änderung des Logos
 - Das Logo kann ersetzt werden, indem man die Datei ``src/assets/logo.png`` überschreibt. Das Bild sollte mindestens 512x512 Pixel groß sein.
