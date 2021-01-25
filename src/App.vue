@@ -1,5 +1,5 @@
 <template>
-  <div id="root" class="box">
+  <div id="root" class="box" v-touch:swipe="swipeHandler">
     <nav-bar-comp id="top" class="topbar"/>
     <div id="app" class="main" v-if="mainData && !mainData.error">
       <div style="max-width: 800px;">
@@ -50,6 +50,17 @@ export default {
     },
     ...mapGetters(["mainData"])
   },
+  methods: {
+    swipeHandler(evt) {
+      if (evt === "left") {
+        this.$store.commit('sidebar', true);
+      }
+      if (evt === "right") {
+        this.$store.commit('sidebar', false);
+      }
+
+    }
+  }
 }
 </script>
 

@@ -5,7 +5,7 @@
       <span class="title-text" v-if="mainData && txt">{{ mainData.title }}</span>
     </b-navbar-brand>
     <b-navbar-nav class="ml-auto">
-      <b-button id="sidebarbutton" variant="light" v-b-toggle:sidebar class="float-right"><b-icon-justify/></b-button>
+      <b-button id="sidebarbutton" variant="light" @click="$store.commit('sidebar', true)" class="float-right"><b-icon-justify/></b-button>
     </b-navbar-nav>
   </b-navbar>
 </template>

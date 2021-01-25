@@ -8,18 +8,23 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        mainData: null
+        mainData: null,
+        sidebar: false
     },
     mutations: {
         getMainData(state) {
             axios.get(normURLS(API_ROOT_URL) + '/' + INSTANCE_ID).then(res => {
                 state.mainData = res.data;
             }).catch(error => state.mainData = {error});
+        },
+        sidebar(state, status) {
+            state.sidebar = status;
         }
     },
     actions: {},
     modules: {},
     getters: {
-        mainData: state => state.mainData
+        mainData: state => state.mainData,
+        sidebar: state => state.sidebar
     }
 })

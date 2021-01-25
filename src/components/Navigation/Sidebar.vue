@@ -2,6 +2,7 @@
   <div>
     <b-sidebar
         id="sidebar"
+        v-model="sidebar"
         backdrop
         shadow="true"
         right
@@ -23,7 +24,7 @@
 
       <div v-if="mainData && !mainData.error">
         <div class="sidebarHead">
-          <b-icon-x v-b-toggle:sidebar class="h4 float-left mt-2 ml-2 clickable"/>
+          <b-icon-x @click="sidebar=false" class="h4 float-left mt-2 ml-2 clickable"/>
           <div v-if="mainData">
             <h4 class="mb-1">{{ mainData.title }}</h4>
             <p class="text-muted mb-0">{{ mainData.description }}</p>
@@ -51,7 +52,15 @@ export default {
   name: "Sidebar",
   components: {SideBarService},
   computed: {
-    ...mapGetters(["mainData"])
+    ...mapGetters(["mainData"]),
+    sidebar: {
+      get() {
+        return this.$store.state.sidebar;
+      },
+      set(value) {
+        this.$store.commit("sidebar", value);
+      }
+    }
   },
   data() {
     return {}
