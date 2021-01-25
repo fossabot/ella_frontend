@@ -24,6 +24,21 @@ export function getCSSVariable(variable) {
 }
 
 /**
+ * Options for Efa-Files
+ * @type {{types: [{description: string, accept: {}]}}
+ */
+export const fileOptions = {
+    types: [
+        {
+            description: '.efa Files',
+            accept: {
+                'application/efa': ['.efa'],
+            },
+        },
+    ],
+};
+
+/**
  * Bestimmt, ob eine Farbe hell oder dunkel ist
  * @param {string} color Die Farbe
  * @returns {boolean} Gibt ``true`` zurück, wenn die Farbe hell ist
