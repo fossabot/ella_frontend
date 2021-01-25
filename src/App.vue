@@ -47,6 +47,7 @@ export default {
         fileHandle.getFile().then(res => {
           res.text().then(text => {
             this.$store.commit("load", JSON.parse(text));
+            this.$router.push("/services/" + JSON.parse(text).name);
           })
         });
       });
