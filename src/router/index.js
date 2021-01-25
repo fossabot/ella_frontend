@@ -24,6 +24,11 @@ const routes = [
     component: () => import('../views/Service')
   },
   {
+    path: '/load',
+    name: "Load",
+    component: () => import('../views/Load')
+  },
+  {
     path: '*',
     name: '404',
     component: () => import('../views/404')

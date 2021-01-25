@@ -36,6 +36,22 @@ export default {
     CustomSpinner,
     NavBarComp
   },
+  mounted() {
+    if ('launchQueue' in window) {
+      window.launchQueue.setConsumer((launchParams) => {
+        // Nothing to do when the queue is empty.
+        if (!launchParams.files.length) {
+          return;
+        }
+        const fileHandle = launchParams.files[0];
+        fileHandle.getFile().then(res => {
+          res.text().then(text => {
+            this.$store.commit("load", JSON.parse(text));
+          })
+        });
+      });
+    }
+  },
   created() {
     this.$store.commit("getMainData");
 

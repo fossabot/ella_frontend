@@ -27,7 +27,15 @@ module.exports = {
             swSrc: 'service-worker.js',
         },
         manifestOptions: {
-            background_color: "#fff"
+            background_color: "#fff",
+            "file_handlers": [
+                {
+                    "action": "/#/",
+                    "accept": {
+                        "application/efa": [".efa"]
+                    }
+                }
+            ]
         }
     },
     devServer: {

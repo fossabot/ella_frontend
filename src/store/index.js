@@ -9,7 +9,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         mainData: null,
-        sidebar: false
+        sidebar: false,
+        load: null
     },
     mutations: {
         getMainData(state) {
@@ -19,12 +20,16 @@ export default new Vuex.Store({
         },
         sidebar(state, status) {
             state.sidebar = status;
+        },
+        load(state, data) {
+            state.load = data;
         }
     },
     actions: {},
     modules: {},
     getters: {
         mainData: state => state.mainData,
-        sidebar: state => state.sidebar
+        sidebar: state => state.sidebar,
+        load: state => state.load
     }
 })
