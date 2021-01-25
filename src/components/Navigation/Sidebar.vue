@@ -21,14 +21,16 @@
       <!--        </b-row>-->
       <!--      </template>-->
 
-      <div class="sidebarHead">
-        <b-icon-x v-b-toggle:sidebar class="h4 float-left mt-2 ml-2 clickable"/>
-        <div v-if="mainData">
-          <h4 class="mb-1">{{ mainData.title }}</h4>
-          <p class="text-muted mb-0">{{ mainData.description }}</p>
+      <div v-if="mainData && !mainData.error">
+        <div class="sidebarHead">
+          <b-icon-x v-b-toggle:sidebar class="h4 float-left mt-2 ml-2 clickable"/>
+          <div v-if="mainData">
+            <h4 class="mb-1">{{ mainData.title }}</h4>
+            <p class="text-muted mb-0">{{ mainData.description }}</p>
+          </div>
         </div>
-      </div>
-      <div v-if="mainData">
+
+
         <side-bar-service v-for="service in mainData.services" :key="service.name" :service="service"/>
 
         <side-bar-service :service="{title: mainData['impressum']}"/>
@@ -36,6 +38,7 @@
         <side-bar-service :service="{title: mainData['contact']}" style="margin-bottom: 10vh"/>
 
       </div>
+      <p class="text-muted p-5" v-else>Verbindung fehlgeschlagen</p>
     </b-sidebar>
   </div>
 </template>
