@@ -2,7 +2,7 @@
   <div>
     <b-button @click="loadForm">Gespeichertes Formular laden</b-button>
     <b-collapse v-model="upload">
-      <b-file @input="loadForm" class="m-2" style="max-width: 100%" v-model="uploadFile" accept=".efa"></b-file>
+      <b-file @input="loadForm" class="m-2" style="max-width: 100%" v-model="uploadFile" accept=".efa" placeholder="Keine Datei ausgewählt" browse-text="Durchsuchen" drop-placeholder="Datei ablegen"></b-file>
     </b-collapse>
     <p class="text-danger" v-if="wrong">Diese Datei ist für einen anderen Fragebogen</p>
     <hr>
