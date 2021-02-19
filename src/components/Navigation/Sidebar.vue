@@ -34,10 +34,6 @@
 
         <side-bar-service v-for="service in mainData.services" :key="service.name" :service="service"/>
 
-        <side-bar-service :service="{title: mainData['impressum']}"/>
-        <side-bar-service :service="{title: mainData['privacy']}"/>
-        <side-bar-service :service="{title: mainData['contact']}" style="margin-bottom: 10vh"/>
-
       </div>
       <p class="text-muted p-5" v-else>Verbindung fehlgeschlagen</p>
     </b-sidebar>
