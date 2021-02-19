@@ -10,7 +10,7 @@ export default {
   computed: {
     component() {
       if (!this.service) {
-        return () => import("../views/404");
+        return () => import("./notFound");
       }
       switch (this.service.type) {
         case 'page':
@@ -20,7 +20,7 @@ export default {
         case 'group':
           return () => import("../components/Services/Group");
         default:
-          return () => import("../views/404");
+          return () => import("./notFound");
       }
     },
     service() {

@@ -8,7 +8,7 @@
 import {isLightColor, getCSSVariable} from "@/utilities/globals.mjs";
 
 export default {
-name: "404",
+name: "notFound",
   computed: {
     isLightColor() {
       return isLightColor(getCSSVariable('secondary'));
