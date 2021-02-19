@@ -14,13 +14,13 @@ export default {
       }
       switch (this.service.type) {
         case 'page':
-          return () => import("../components/Services/Page");
+          return () => import(/* webpackChunkName: "Page" */ "../components/Services/Page");
         case 'service':
-          return () => import("../components/Services/Form");
+          return () => import(/* webpackChunkName: "Form" */ "../components/Services/Form");
         case 'group':
-          return () => import("../components/Services/Group");
+          return () => import(/* webpackChunkName: "Group" */ "../components/Services/Group");
         default:
-          return () => import("./notFound");
+          return () => import(/* webpackChunkName: "notFound" */ "./notFound");
       }
     },
     service() {

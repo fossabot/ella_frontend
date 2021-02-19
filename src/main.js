@@ -1,10 +1,19 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import {CardPlugin, SidebarPlugin, ButtonPlugin, JumbotronPlugin, SpinnerPlugin, NavbarPlugin, BootstrapVue, BIconX, BIconJustify} from 'bootstrap-vue'
 import './styles.scss'
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
+
+// Vue.use(BootstrapVue);
+Vue.use(CardPlugin);
+Vue.use(NavbarPlugin);
+Vue.use(SidebarPlugin);
+Vue.use(JumbotronPlugin);
+Vue.use(SpinnerPlugin);
+Vue.use(ButtonPlugin);
+Vue.use(BootstrapVue);
+Vue.component("BIconX", BIconX);
+Vue.component("BIconJustify", BIconJustify);
 
 import Vue2TouchEvents from "vue2-touch-events";
 Vue.use(Vue2TouchEvents);

@@ -1,23 +1,21 @@
 <template>
   <div>
-    <div v-if="!DISABLE_FORM_SAVING">
-      <b-button @click="loadForm">Gespeichertes Formular laden</b-button>
-      <b-collapse v-model="upload">
-        <b-file @input="loadForm" class="m-2" style="max-width: 100%" v-model="uploadFile" accept=".efa" placeholder="Keine Datei ausgewählt" browse-text="Durchsuchen" drop-placeholder="Datei ablegen"></b-file>
-      </b-collapse>
-      <p class="text-danger" v-if="wrong">Diese Datei ist für einen anderen Fragebogen</p>
+    <div>
+      <h2 class="mt-3">{{service.title}}</h2>
+      <p class="text-muted">{{service.description}}</p>
+      <div v-if="!DISABLE_FORM_SAVING">
+        <b-button @click="loadForm">Gespeichertes Formular laden</b-button>
+        <b-collapse v-model="upload">
+          <b-file @input="loadForm" class="m-2" style="max-width: 100%" v-model="uploadFile" accept=".efa" placeholder="Keine Datei ausgewählt" browse-text="Durchsuchen" drop-placeholder="Datei ablegen"></b-file>
+        </b-collapse>
+        <p class="text-danger" v-if="wrong">Diese Datei ist für einen anderen Fragebogen</p>
+      </div>
       <hr>
     </div>
     <json-form v-if="form" :json="form" :ui="service.ui" :onSubmit="onSubmit">
       <div style="width: 100%; display: flex; justify-content: center">
-        <b-button-group class="w-100">
-          <b-button type="submit" v-for="(action, index) in service['formactions']" :key="action.name"
-                    :disabled="doing[index]"
-                    @click="selected(index)" :variant="action['cssclass']">
-            <b-spinner class="m-0" style="width: 1.25rem; height: 1.25rem" v-if="doing[index]"/>
-            <span v-else>{{ action.title }}</span></b-button>
-          <b-button v-if="!DISABLE_FORM_SAVING" variant="primary" type="submit" @click="selected('save')">Speichern</b-button>
-        </b-button-group>
+        <ActionButtonGroup :save-button="!DISABLE_FORM_SAVING" :doing="doing"
+                      :selected="selected" :service="service"/>
       </div>
     </json-form>
   </div>
@@ -27,11 +25,11 @@
 import jsonForm from "@educorvi/vue-json-form"
 import serviceMixin from "@/components/Services/serviceMixin";
 import axios from "axios";
-import {normURLS} from "@/utilities/globals.mjs";
-import {API_ROOT_URL, INSTANCE_ID, DISABLE_FORM_SAVING} from "../../../config";
+import {fileOptions, normURLS} from "@/utilities/globals.mjs";
+import {API_ROOT_URL, DISABLE_FORM_SAVING, INSTANCE_ID} from "../../../config";
 import {saveAs} from "file-saver";
-import {fileOptions} from "@/utilities/globals.mjs";
 import {mapGetters} from "vuex";
+import ActionButtonGroup from "@/components/Services/ActionButtonGroup";
 
 export default {
   name: "Form",
@@ -46,7 +44,7 @@ export default {
     }
   },
   mixins: [serviceMixin],
-  components: {jsonForm},
+  components: {ActionButtonGroup, jsonForm},
   created() {
     if (!this.load) {
       this.form = this.service.form;
@@ -151,6 +149,3 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>

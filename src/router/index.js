@@ -21,17 +21,17 @@ const routes = [
   {
     path: '/services/:service',
     name: 'Service',
-    component: () => import('../views/Service')
+    component: () => import(/* webpackChunkName: "Service" */ '../views/Service')
   },
   {
     path: '/load',
     name: "Load",
-    component: () => import('../views/Load')
+    component: () => import(/* webpackChunkName: "load" */ '../views/Load')
   },
   {
     path: '*',
     name: '404',
-    component: () => import('../views/notFound')
+    component: () => import(/* webpackChunkName: "notFound" */ '../views/notFound')
 
   }
 ]
