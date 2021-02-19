@@ -4,7 +4,7 @@
   },
   "source": {
     "include": ["config"],
-    "includePattern": "\\.(m?)js$",
+    "includePattern": "ella.config.template.js",
     "excludePattern": "(node_modules/|docs)"
   },
   "plugins": [

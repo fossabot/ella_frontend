@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>ella.config.js - Documentation</title>
+    <title>ella.config.example.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -32,7 +32,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">ella.config.js</h1>
+    <h1 class="page-title">ella.config.example.js</h1>
     
 
     
@@ -74,7 +74,7 @@ const NAVBAR_VARIANTS = {
  * Die URL unter der die Wurzel der Ella API liegt
  * @type string
  */
-const API_ROOT_URL = "https://ella.uv-kooperation.de/";
+const API_ROOT_URL = "https://ella.uv-kooperation.de";
 
 /**
  * Die ID der Ella App
@@ -101,6 +101,13 @@ const THEME_COLOR = "#002d75"
  */
 const NAVBAR_STYLE = NAVBAR_VARIANTS.LOGO_AND_NAME
 
+/**
+ * Deaktiviert die Speichern und Laden Funktionalität für Formulare
+ * @type {boolean}
+ * @default false
+ */
+const DISABLE_FORM_SAVING = false
+
 
 
 
@@ -108,7 +115,7 @@ const NAVBAR_STYLE = NAVBAR_VARIANTS.LOGO_AND_NAME
 
 
 module.exports = {
-    API_ROOT_URL, INSTANCE_ID, TITLE, THEME_COLOR, NAVBAR_STYLE, NAVBAR_VARIANTS
+    API_ROOT_URL, INSTANCE_ID, TITLE, THEME_COLOR, NAVBAR_STYLE, NAVBAR_VARIANTS, DISABLE_FORM_SAVING
 };
 </code></pre>
         </article>

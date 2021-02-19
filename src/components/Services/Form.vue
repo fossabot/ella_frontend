@@ -1,11 +1,13 @@
 <template>
   <div>
-    <b-button @click="loadForm">Gespeichertes Formular laden</b-button>
-    <b-collapse v-model="upload">
-      <b-file @input="loadForm" class="m-2" style="max-width: 100%" v-model="uploadFile" accept=".efa" placeholder="Keine Datei ausgewählt" browse-text="Durchsuchen" drop-placeholder="Datei ablegen"></b-file>
-    </b-collapse>
-    <p class="text-danger" v-if="wrong">Diese Datei ist für einen anderen Fragebogen</p>
-    <hr>
+    <div v-if="!DISABLE_FORM_SAVING">
+      <b-button @click="loadForm">Gespeichertes Formular laden</b-button>
+      <b-collapse v-model="upload">
+        <b-file @input="loadForm" class="m-2" style="max-width: 100%" v-model="uploadFile" accept=".efa" placeholder="Keine Datei ausgewählt" browse-text="Durchsuchen" drop-placeholder="Datei ablegen"></b-file>
+      </b-collapse>
+      <p class="text-danger" v-if="wrong">Diese Datei ist für einen anderen Fragebogen</p>
+      <hr>
+    </div>
     <json-form v-if="form" :json="form" :ui="service.ui" :onSubmit="onSubmit">
       <div style="width: 100%; display: flex; justify-content: center">
         <b-button-group class="w-100">
@@ -14,7 +16,7 @@
                     @click="selected(index)" :variant="action['cssclass']">
             <b-spinner class="m-0" style="width: 1.25rem; height: 1.25rem" v-if="doing[index]"/>
             <span v-else>{{ action.title }}</span></b-button>
-          <b-button variant="primary" type="submit" @click="selected('save')">Speichern</b-button>
+          <b-button v-if="!DISABLE_FORM_SAVING" variant="primary" type="submit" @click="selected('save')">Speichern</b-button>
         </b-button-group>
       </div>
     </json-form>
@@ -26,7 +28,7 @@ import jsonForm from "@educorvi/vue-json-form"
 import serviceMixin from "@/components/Services/serviceMixin";
 import axios from "axios";
 import {normURLS} from "@/utilities/globals.mjs";
-import {API_ROOT_URL, INSTANCE_ID} from "../../../config";
+import {API_ROOT_URL, INSTANCE_ID, DISABLE_FORM_SAVING} from "../../../config";
 import {saveAs} from "file-saver";
 import {fileOptions} from "@/utilities/globals.mjs";
 import {mapGetters} from "vuex";
@@ -53,7 +55,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["load"])
+    ...mapGetters(["load"]),
+    DISABLE_FORM_SAVING() {
+      return DISABLE_FORM_SAVING;
+    }
   },
   methods: {
     selected(index) {

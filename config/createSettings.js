@@ -1,13 +1,18 @@
 const replace = require("replace-in-file").replaceInFileSync;
 const fs = require("fs");
 const term = require("terminal-kit").createTerminal();
-const waitOn = require("wait-on")
+const waitOn = require("wait-on");
+const axios = require("axios");
 
 const file = "config/ella.config.js";
 
 if (process.env.JENKINS) {
     fs.copyFileSync("config/ella.config.example.js", file);
     process.exit(0);
+}
+
+function normURLS(url) {
+    return url.replace(/\/$/, "");
 }
 
 async function configure() {
@@ -18,18 +23,47 @@ async function configure() {
 
     let input;
 
-    await waitOn(opts);
-    term("\nBitte geben Sie die Root URL der API ein.\n");
-    input = await term.inputField(
-        {autoCompleteMenu: false}
-    ).promise;
+    while (!input) {
+        await waitOn(opts);
+        term("\nBitte geben Sie die Root URL der API ein.\n");
+        input = await term.inputField(
+            {autoCompleteMenu: false}
+        ).promise;
+        try{
+            var res = await axios.get(input);
+            if (res.status !== 200) {
+                input = null;
+            }
+        }catch (e) {
+            input = null;
+        }
+        if (input === null) {
+            term.red("\nSie haben eine ungültige URL angegeben\n");
+        }
+    }
+    const url = input;
     replace({files: file, from: /%API_ROOT_URL%/g, to: input});
 
     await waitOn(opts);
-    term("\nBitte geben Sie die Instance ID der API ein.\n");
-    input = await term.inputField(
-        {autoCompleteMenu: false}
-    ).promise;
+    input = null;
+    while (!input) {
+        term("\nBitte geben Sie die Instance ID der API ein.\n");
+        input = await term.inputField(
+            {autoCompleteMenu: false}
+        ).promise;
+        try{
+            res = await axios.get(normURLS(url) + "/" + input);
+            if (res.status !== 200) {
+                input = null;
+            }
+        }catch (e) {
+            input = null;
+        }
+        if (input === null) {
+            term.red("\nDie angegebene Instanz konnte nicht aufgerufen werden\n");
+        }
+    }
+
     replace({files: file, from: /%INSTANCE_ID%/g, to: input});
 
     await waitOn(opts);
@@ -56,7 +90,7 @@ async function configure() {
 
     await waitOn(opts);
     term("\nWählen Sie die Variante der Navigationsleiste\n");
-    term.singleColumnMenu(items, function (error, response) {
+    term.singleColumnMenu(items, async function (error, response) {
         switch (response.selectedIndex) {
             case 0:
                 replace({files: file, from: /"%NAVBAR_STYLE%"/g, to: "NAVBAR_VARIANTS.LOGO"});
@@ -68,11 +102,27 @@ async function configure() {
                 replace({files: file, from: /"%NAVBAR_STYLE%"/g, to: "NAVBAR_VARIANTS.LOGO_AND_NAME"});
                 break;
         }
-        term.green("\nKonfiguration abgeschlossen\n");
-        process.exit(0);
+
+        await waitOn(opts);
+        term("\nSoll die Speichern/Laden Funktion deaktiviert werden? [j|N]\n");
+        term.yesOrNo({yes: ['j', 'J'], no: ['n', 'N', 'ENTER']}, function (error, result) {
+
+            if (result) {
+                replace({files: file, from: /DISABLE_FORM_SAVING_VALUE/g, to: true});
+            } else {
+                replace({files: file, from: /DISABLE_FORM_SAVING_VALUE/g, to: false});
+            }
+            term.green("\nKonfiguration abgeschlossen\n");
+            process.exit(0);
+        });
     });
 
 
+}
+
+if (process.argv[2] === "--override") {
+    fs.unlinkSync(file);
+    configure();
 }
 
 if (!fs.existsSync(file)) {

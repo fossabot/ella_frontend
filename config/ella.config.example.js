@@ -57,6 +57,13 @@ const THEME_COLOR = "#002d75"
  */
 const NAVBAR_STYLE = NAVBAR_VARIANTS.LOGO_AND_NAME
 
+/**
+ * Deaktiviert die Speichern und Laden Funktionalität für Formulare
+ * @type {boolean}
+ * @default false
+ */
+const DISABLE_FORM_SAVING = false
+
 
 
 
@@ -64,5 +71,5 @@ const NAVBAR_STYLE = NAVBAR_VARIANTS.LOGO_AND_NAME
 
 
 module.exports = {
-    API_ROOT_URL, INSTANCE_ID, TITLE, THEME_COLOR, NAVBAR_STYLE, NAVBAR_VARIANTS
+    API_ROOT_URL, INSTANCE_ID, TITLE, THEME_COLOR, NAVBAR_STYLE, NAVBAR_VARIANTS, DISABLE_FORM_SAVING
 };
