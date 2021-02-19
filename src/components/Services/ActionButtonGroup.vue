@@ -1,5 +1,5 @@
 <template>
-  <b-button-group class="w-100">
+  <b-button-group :vertical="stacked" class="w-100">
     <b-button type="submit" v-for="(action, index) in service['formactions']" :key="action.name"
               :disabled="doing[index]"
               @click="selected(index)" :variant="action['cssclass']">
@@ -23,6 +23,9 @@ export default {
     },
     selected: {
       type: Function
+    },
+    stacked: {
+      type: Boolean
     }
   }
 }
