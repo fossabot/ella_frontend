@@ -2,7 +2,7 @@
   <b-navbar id="navbar" :type="isLightColor?'light':'dark'" class="navbarCustom" variant="primary">
     <b-navbar-brand>
       <router-link to="/">
-        <img v-if="img" id="logo" alt="Logo" src="@/assets/logo.png"/>
+        <img v-if="img" id="logo" alt="Logo" src="@/assets/HeadLogo.png"/>
       </router-link>
       <span v-if="mainData && txt" class="title-text">{{ mainData.title }}</span>
     </b-navbar-brand>
