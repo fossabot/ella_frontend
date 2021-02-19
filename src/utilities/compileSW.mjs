@@ -1,8 +1,8 @@
 import fs from "fs";
+import {readFile} from "fs/promises";
 import dotenv from "dotenv";
 import replace from "replace-in-file";
 import {normURLS} from "./globals.mjs";
-import packageJson from "../../package.json";
 import waitOn from "wait-on"
 import config from "../../config/ella.config.js"
 
@@ -31,6 +31,7 @@ async function compile() {
     if (!API_ROOT_URL) throwError("ROOT_URL");
     await replace({files: file, from: /%ROOT%/g, to: normURLS(API_ROOT_URL)})
 
+    const packageJson = JSON.parse(await readFile(new URL("../../package.json", import.meta.url)))
 
     await waitOn(opts);
     await replace({files: file, from: /%VERSION%/g, to: packageJson.version})
