@@ -8,20 +8,6 @@
         right
         no-header>
 
-      <!--      <template #footer="{}">-->
-      <!--        <b-row style="background-color: grey; max-width: 100% !important;">-->
-      <!--          <b-col>-->
-      <!--            Impressum-->
-      <!--          </b-col>-->
-      <!--          <b-col>-->
-      <!--            Impressum-->
-      <!--          </b-col>-->
-      <!--          <b-col>-->
-      <!--            Impressum-->
-      <!--          </b-col>-->
-      <!--        </b-row>-->
-      <!--      </template>-->
-
       <div v-if="mainData && !mainData.error">
         <div class="sidebarHead">
           <b-icon-x @click="sidebar=false" class="h4 float-left mt-2 ml-2 clickable"/>
@@ -32,7 +18,7 @@
         </div>
 
 
-        <side-bar-service v-for="service in mainData.services" :key="service.name" :service="service"/>
+        <side-bar-service v-for="(service, index) in mainData.services" :key="service.name" :service="service" :no-divider="index === mainData.services.length-1"/>
 
       </div>
       <p class="text-muted p-5" v-else>Verbindung fehlgeschlagen</p>
