@@ -61,6 +61,9 @@ export default {
   methods: {
     selected(index) {
       this.indexOfAction = index;
+      if (this.service["formactions"][this.indexOfAction].method === "REDIRECT") {
+        this.$router.push("/services/"+this.service["formactions"][this.indexOfAction].name);
+      }
     },
     fill(data) {
       if (data.name !== this.service.name) {

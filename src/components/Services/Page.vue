@@ -1,9 +1,10 @@
 <template>
   <div>
-<!--    <h2>{{ service.title }}</h2>-->
-<!--    <p class="text-muted">{{service.description}}</p>-->
+    <!--    <h2>{{ service.title }}</h2>-->
+    <!--    <p class="text-muted">{{service.description}}</p>-->
     <span v-html="service.text"/>
-    <ActionButtonGroup v-if="service['formactions']" :service="service" :stacked="true" :save-button="false" :selected="selectFormaction"/>
+    <ActionButtonGroup v-if="service['formactions']" :save-button="false" :selected="selectFormaction" :service="service"
+                       :stacked="true"/>
   </div>
 </template>
 
@@ -17,7 +18,9 @@ export default {
   components: [ActionButtonGroup],
   methods: {
     selectFormaction(index) {
-      this.$router.push("/services/"+this.service["formactions"][index].name)
+      if (this.service["formactions"][this.indexOfAction].method === "REDIRECT") {
+        this.$router.push("/services/" + this.service["formactions"][index].name)
+      }
     }
   },
 }
