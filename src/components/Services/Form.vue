@@ -1,21 +1,25 @@
 <template>
   <div>
     <div>
-      <h2 class="mt-3">{{service.title}}</h2>
-      <p class="text-muted">{{service.description}}</p>
+      <h2 class="mt-3">{{ service.title }}</h2>
+      <p class="text-muted">{{ service.description }}</p>
       <div v-if="!DISABLE_FORM_SAVING">
         <b-button @click="loadForm">Gespeichertes Formular laden</b-button>
         <b-collapse v-model="upload">
-          <b-file @input="loadForm" class="m-2" style="max-width: 100%" v-model="uploadFile" accept=".efa" placeholder="Keine Datei ausgewählt" browse-text="Durchsuchen" drop-placeholder="Datei ablegen"></b-file>
+          <b-file v-model="uploadFile" accept=".efa" browse-text="Durchsuchen" class="m-2"
+                  drop-placeholder="Datei ablegen"
+                  placeholder="Keine Datei ausgewählt" style="max-width: 100%"
+                  @input="loadForm"></b-file>
         </b-collapse>
-        <p class="text-danger" v-if="wrong">Diese Datei ist für einen anderen Fragebogen</p>
+        <p v-if="wrong" class="text-danger">Diese Datei ist für einen anderen Fragebogen</p>
       </div>
       <hr>
     </div>
-    <json-form v-if="form" :json="form" :ui="service.ui" :onSubmit="onSubmit">
+    <json-form v-if="form" :json="form" :onSubmit="onSubmit" :ui="service.ui">
       <div style="width: 100%; display: flex; justify-content: center">
-        <ActionButtonGroup :save-button="!DISABLE_FORM_SAVING" :doing="doing"
-                      :selected="selected" :service="service"/>
+        <ActionButtonGroup :doing="doing" :save-button="!DISABLE_FORM_SAVING"
+                           :selected="selected" :service="service"
+                           @submitModal="submitModal"/>
       </div>
     </json-form>
   </div>
@@ -40,7 +44,8 @@ export default {
       form: null,
       wrong: false,
       upload: false,
-      uploadFile: null
+      uploadFile: null,
+      filledFormData: null
     }
   },
   mixins: [serviceMixin],
@@ -62,7 +67,7 @@ export default {
     selected(index) {
       this.indexOfAction = index;
       if (this.service["formactions"][this.indexOfAction].method === "REDIRECT") {
-        this.$router.push("/services/"+this.service["formactions"][this.indexOfAction].name);
+        this.$router.push("/services/" + this.service["formactions"][this.indexOfAction].name);
       }
     },
     fill(data) {
@@ -93,6 +98,7 @@ export default {
         file.text().then(contents => this.fill(JSON.parse(contents)));
         return;
       }
+
       async function load() {
         const fileHandle = await window.showOpenFilePicker(fileOptions);
         const file = await fileHandle[0].getFile();
@@ -107,9 +113,44 @@ export default {
       }
 
     },
+    //funktion zum senden der daten
+    sendData(data, additional) {
+      this.$set(this.doing, this.indexOfAction, true)
+      axios({
+        method: this.service["formactions"][this.indexOfAction].method.toLowerCase(),
+        url: normURLS(API_ROOT_URL) + '/' + INSTANCE_ID + "/" + this.service.name + "/" + this.service["formactions"][this.indexOfAction].name,
+        data: {
+          form: data,
+          additional
+        }
+      }).then(res => {
+        // Antwort bearbeiten
+        switch (res.data.type) {
+          case 'email':
+            window.open(`mailto:?subject=Fragebogen%20teilen&body=${res.data.content}`);
+            break;
+
+          case 'file':
+            console.log(res.data);
+            break;
+
+        }
+      }).catch(err => {
+        this.$bvToast.toast("Es gab einen Fehler beim Ausführen dieser Aktion! Bitte versuchen Sie es später erneut.", {
+          title: "Fehler",
+          variant: "danger"
+        });
+        console.error(err);
+      }).finally(() => this.$set(this.doing, this.indexOfAction, false));
+    },
+    submitModal(modalData) {
+      this.sendData(this.filledFormData, modalData);
+    },
     onSubmit(data) {
       const toSave = {data, name: this.service.name}
+      this.filledFormData = data;
 
+      //Funktion zum Speichern mit Filepicker
       async function save() {
         const handle = await window.showSaveFilePicker(fileOptions);
         const writable = await handle.createWritable();
@@ -119,6 +160,7 @@ export default {
         await writable.close();
       }
 
+      // Speichern
       if (this.indexOfAction === 'save') {
         if (window.showSaveFilePicker !== undefined) {
           save();
@@ -127,22 +169,12 @@ export default {
         }
 
       } else {
-        this.$set(this.doing, this.indexOfAction, true);
-        axios({
-          method: this.service["formactions"][this.indexOfAction].method.toLowerCase(),
-          url: normURLS(API_ROOT_URL) + '/' + INSTANCE_ID + "/" + this.service.name + "/" + this.service["formactions"][this.indexOfAction].name,
-          data: {
-            form: data
-          }
-        }).then(res => {
-          console.log(res);
-        }).catch(err => {
-          this.$bvToast.toast("Es gab einen Fehler beim Ausführen dieser Aktion! Bitte versuchen Sie es später erneut.", {
-            title: "Fehler",
-            variant: "danger"
-          });
-          console.error(err);
-        }).finally(() => this.$set(this.doing, this.indexOfAction, false));
+        //Button action
+        if (this.service["formactions"][this.indexOfAction].additional) {
+          this.$root.$bvModal.show('modal_' + this.service["formactions"][this.indexOfAction].name);
+        } else {
+          this.sendData(data);
+        }
       }
     }
 
