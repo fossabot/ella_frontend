@@ -1,11 +1,11 @@
 <template>
   <b-button-group :vertical="stacked" class="w-100">
-    <b-button type="submit" v-for="(action, index) in service['formactions']" :key="action.name"
-              :disabled="doing[index]"
-              @click="selected(index)" :variant="action['cssclass']">
-      <b-spinner class="m-0" style="width: 1.25rem; height: 1.25rem" v-if="doing[index]"/>
+    <b-button v-for="(action, index) in service['formactions']" :key="action.name" :disabled="doing[index]"
+              :variant="action['cssclass']"
+              type="submit" @click="selected(index)">
+      <b-spinner v-if="doing[index]" class="m-0" style="width: 1.25rem; height: 1.25rem"/>
       <span v-else>{{ action.title }}</span></b-button>
-    <b-button v-if="saveButton" variant="primary" type="submit" @click="selected">Speichern</b-button>
+    <b-button v-if="saveButton" type="submit" variant="primary" @click="selected('save')">Speichern</b-button>
   </b-button-group>
 </template>
 <script>
@@ -17,6 +17,9 @@ export default {
     },
     saveButton: {
       type: Boolean
+    },
+    save: {
+      type: Function
     },
     doing: {
       type: Array
