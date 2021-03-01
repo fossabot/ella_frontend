@@ -24,3 +24,6 @@ Hier können tiefergehende stilistische Änderungen vorgenommen oder auch ganze 
 ```
 npm run build
 ```
+
+### Komponentendokumentation
+[https://educorvi.github.io/ella_frontend](https://educorvi.github.io/ella_frontend/)
