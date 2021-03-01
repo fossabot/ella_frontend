@@ -113,8 +113,20 @@ export default {
       }
 
     },
+
     //funktion zum senden der daten
     sendData(data, additional) {
+
+
+      function downloadBase64File(contentType, base64Data, fileName) {
+        const linkSource = `data:${contentType};base64,${base64Data}`;
+        const downloadLink = document.createElement("a");
+        downloadLink.href = linkSource;
+        downloadLink.download = fileName;
+        downloadLink.click();
+      }
+
+
       this.$set(this.doing, this.indexOfAction, true)
       axios({
         method: this.service["formactions"][this.indexOfAction].method.toLowerCase(),
@@ -129,11 +141,13 @@ export default {
           case 'email':
             window.open(`mailto:?subject=Fragebogen%20teilen&body=${res.data.content}`);
             break;
-
-          case 'file':
-            console.log(res.data);
+          case 'link':
+            window.open(res.data.content);
             break;
 
+          case 'file':
+            downloadBase64File(res.data.mimeType, res.data.content, res.data.fileName);
+            break;
         }
       }).catch(err => {
         this.$bvToast.toast("Es gab einen Fehler beim Ausführen dieser Aktion! Bitte versuchen Sie es später erneut.", {
