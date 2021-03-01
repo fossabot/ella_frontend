@@ -139,7 +139,8 @@ export default {
         // Antwort bearbeiten
         switch (res.data.type) {
           case 'email':
-            window.open(`mailto:?subject=Fragebogen%20teilen&body=${res.data.content}`, '_blank');
+            // window.open(`mailto:?subject=Fragebogen%20teilen&body=${res.data.content}`, '_blank');
+            window.location.href = `mailto:?subject=Fragebogen%20teilen&body=${res.data.content}`;
             break;
           case 'link':
             window.open(res.data.content, '_blank');
