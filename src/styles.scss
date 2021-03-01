@@ -6,6 +6,17 @@
   }
 }
 
+@font-face {
+  font-family: 'DGUV';
+  src: url("~@/assets/DGUVMeta-Normal.woff") format("woff");
+  src: url("~@/assets/DGUVMeta-Normal.otf") format("opentype");
+}
+
+#root {
+  font-family: DGUV, sans-serif !important;
+  font-size: 15px !important;
+}
+
 @if $primary!=#fff {
   ::-moz-selection {
     color: set-text-color($primary);
