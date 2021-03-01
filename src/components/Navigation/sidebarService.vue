@@ -18,9 +18,20 @@
 </template>
 
 <script>
-import {isLightColor} from "@/utilities/globals.mjs";
+import {isLightColor} from "../../utilities/globals.mjs";
 import {THEME_COLOR} from "../../../config";
 
+/**
+ * @module SidebarService
+ * @description A single service for the sidebar
+ * @category Components
+ * @subcategory Navigation
+ *
+ * @vue-prop {Object} service The service for which a sidebar entry is wanted
+ * @vue-prop {Boolean} noDivider Hide the divider at the end
+ *
+ * @vue-computed {Boolean} isActive Is this service currently visited by the user
+ */
 export default {
   name: "sideBarService",
   props: {

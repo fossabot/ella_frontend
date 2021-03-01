@@ -12,6 +12,13 @@
 import serviceMixin from "@/components/Services/serviceMixin";
 import ActionButtonGroup from "@/components/Services/ActionButtonGroup"
 
+/**
+ * @module Page
+ * @description A page that displays html and may contain redirect buttons at the bottom
+ * @category Components
+ * @subcategory Services
+ */
+
 export default {
   name: "Page",
   mixins: [serviceMixin],

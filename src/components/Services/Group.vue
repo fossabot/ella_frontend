@@ -10,6 +10,14 @@
 import serviceMixin from "@/components/Services/serviceMixin";
 import SideBarService from "@/components/Navigation/sidebarService";
 
+/**
+ * @module Group
+ * @description A component that renders groups. Should not be used
+ * @deprecated
+ * @category Components
+ * @subcategory Services
+ */
+
 export default {
   name: "Group",
   components: {SideBarService},

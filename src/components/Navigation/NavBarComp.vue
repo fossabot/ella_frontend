@@ -1,5 +1,5 @@
 <template>
-  <b-navbar id="navbar" :type="isLightColor?'light':'dark'" class="navbarCustom" variant="primary">
+  <b-navbar toggleable="true" id="navbar" :type="isLightColor?'light':'dark'" class="navbarCustom" variant="primary">
     <b-navbar-brand>
       <router-link to="/">
         <img v-if="img" id="logo" alt="Logo" src="@/assets/HeadLogo.png"/>
@@ -7,9 +7,10 @@
       <span v-if="mainData && txt" class="title-text">{{ mainData.title }}</span>
     </b-navbar-brand>
     <b-navbar-nav class="ml-auto">
-      <b-button id="sidebarbutton" class="float-right" variant="light" @click="$store.commit('sidebar', true)">
-        <b-icon-justify/>
-      </b-button>
+      <b-navbar-toggle target="" @click="$store.commit('sidebar', true)"></b-navbar-toggle>
+<!--      <b-button id="sidebarbutton" class="float-right" variant="light" @click="$store.commit('sidebar', true)">-->
+<!--        <b-icon-justify/>-->
+<!--      </b-button>-->
     </b-navbar-nav>
   </b-navbar>
 </template>
@@ -19,6 +20,15 @@ import {isLightColor} from "@/utilities/globals.mjs";
 import {NAVBAR_STYLE, NAVBAR_VARIANTS, THEME_COLOR} from "../../../config";
 import {mapGetters} from "vuex";
 
+/**
+ * @module navigation/Navbar
+ * @description The navbar
+ * @category Components
+ * @subcategory Navigation
+ *
+ * @vue-computed {boolean} img Should the image be shown
+ * @vue-computed {boolean} txt Should the title be shown as text
+ */
 export default {
   name: "NavBarComp",
   computed: {

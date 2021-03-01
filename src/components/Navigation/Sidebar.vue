@@ -28,13 +28,20 @@
 
 <script>
 import {mapGetters} from "vuex"
-import SideBarService from "@/components/Navigation/sidebarService";
+import SideBarService from "./sidebarService";
 
+/**
+ * @module Sidebar
+ * @category Components
+ * @subcategory Navigation
+ * @description The Sidebar of the ella-app
+ */
 export default {
   name: "Sidebar",
   components: {SideBarService},
   computed: {
     ...mapGetters(["mainData"]),
+    //map store sidebar state
     sidebar: {
       get() {
         return this.$store.state.sidebar;

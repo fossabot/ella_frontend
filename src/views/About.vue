@@ -5,6 +5,11 @@
   </div>
 </template>
 <script>
+/**
+ * @module About
+ * @category Views
+ * @description A hidden about page. Shows the app's version
+ */
 export default {
   name:"About",
   computed: {

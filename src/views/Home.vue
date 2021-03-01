@@ -7,6 +7,11 @@
 <script>
 import {mapGetters} from "vuex";
 
+/**
+ * @module Home
+ * @category Views
+ * @description The start view of the app. Renders the default service
+ */
 export default {
   name: 'Home',
   computed: {

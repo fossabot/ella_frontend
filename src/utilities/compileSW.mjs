@@ -6,6 +6,12 @@ import {normURLS} from "./globals.mjs";
 import waitOn from "wait-on"
 import config from "../../config/ella.config.js"
 
+/**
+ * @module compileSW
+ * @category Utilities
+ * @description Builds the service worker from the file ``sw.empty.js`` by replacing the placeholders
+ */
+
 const {TITLE, API_ROOT_URL} = config;
 const opts = {resources: ["service-worker.js"]};
 
@@ -15,6 +21,10 @@ function throwError(property) {
     throw new Error(property + " must be defined!");
 }
 
+/**
+ * Compiles the Service Worker
+ * @returns {Promise<void>}
+ */
 async function compile() {
     const file = './service-worker.js';
     await fs.copyFile('./src/utilities/sw.empty.js', file, (err => {

@@ -5,6 +5,13 @@
 <script>
 import {mapGetters} from "vuex";
 
+/**
+ * @module Service
+ * @category Views
+ * @description The Service view. Needs the service name as parameter in the url (/service/nameOfService).
+ * @vue-computed {Object} component Determines the component needed for the given service
+ * @vue-computed {Object} service Searches recursively (because of groups) for the service, whose name is given by the parameter
+ */
 export default {
   name: "Service",
   computed: {

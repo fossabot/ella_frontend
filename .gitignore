@@ -26,3 +26,4 @@ dist.zip
 /service-worker.js
 /config/ella.config.js
 /testerei/
+/.cache/

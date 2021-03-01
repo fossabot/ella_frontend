@@ -13,7 +13,7 @@
       <b-jumbotron bg-variant="danger" :text-variant="textVariant">
         <template #header>Fehler!</template>
         <template #lead>Bitte versuchen Sie es später erneut!</template>
-        ({{mainData.error}})
+        ({{ mainData.error }})
       </b-jumbotron>
     </div>
 
@@ -29,6 +29,12 @@ import Sidebar from "@/components/Navigation/Sidebar";
 import {TITLE, THEME_COLOR} from "../config"
 import {isLightColor, getCSSVariable} from "@/utilities/globals.mjs";
 
+
+/**
+ * @module App
+ * @description The App's entry point
+ * @vue-computed {String} textVariant Determines, if text should be light or dark based on the 'danger' color
+ */
 export default {
   name: 'App',
   components: {
@@ -37,6 +43,11 @@ export default {
     NavBarComp
   },
   mounted() {
+    /**
+     * This is used to enable File handling of .efa Files
+     * If the Browser supports file handling API, then, if a User opens the file, the PWA will open and the file(s) it was opened with will be queued into the launchqueue.
+     * The following reads the first file, and loads it into the referred service.
+     */
     if ('launchQueue' in window) {
       window.launchQueue.setConsumer((launchParams) => {
         // Nothing to do when the queue is empty.
@@ -54,10 +65,9 @@ export default {
     }
   },
   created() {
+    //Loads the data from the ella-backend and sets title + theme color
     this.$store.commit("getMainData");
-
     document.title = TITLE;
-
     const metaThemeColor = document.querySelector("meta[name=theme-color]");
     metaThemeColor.setAttribute("content", THEME_COLOR);
   },
@@ -68,6 +78,10 @@ export default {
     ...mapGetters(["mainData"])
   },
   methods: {
+    /**
+     * Handles swipe events to open and close the sidebar
+     * @param {String} evt The Swipe-Event
+     */
     swipeHandler(evt) {
       if (evt === "left") {
         this.$store.commit('sidebar', true);
@@ -93,11 +107,13 @@ export default {
   left: 0;
   top: 0;
 }
+
 .box {
   display: flex;
   flex-flow: column;
   align-items: center;
 }
+
 .main {
   max-width: 900px;
   padding: 8px 12px;
@@ -107,49 +123,4 @@ export default {
 .hider {
   width: 100vw;
 }
-
-/**
-.box {
-
-  display: flex;
-  flex-flow: column;
-  height: 100%;
-  align-items: center;
-
-  .topbar {
-    flex: 0 1 auto;
-    width: 100vw;
-  }
-
-  .main {
-    flex: 1 1 auto;
-    padding: 5px 8px;
-    width: 100vw;
-    overflow: scroll;
-  }
-
-
-  //Scrollbars
-
-  $border-radius-scroll: 0px;
-  ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-  }
-
-
-  ::-webkit-scrollbar-track {
-    border-radius: $border-radius-scroll !important;
-    background-color: transparent !important;
-  }
-
-
-  ::-webkit-scrollbar-thumb {
-    background: $primary !important;
-    border-radius: $border-radius-scroll !important;
-  }
-}
-**/
-
-
 </style>

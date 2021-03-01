@@ -7,6 +7,11 @@
 <script>
 import {isLightColor, getCSSVariable} from "@/utilities/globals.mjs";
 
+/**
+ * @module notFound
+ * @category Views
+ * @description A view that indicates, that no matching service was found
+ */
 export default {
 name: "notFound",
   computed: {

@@ -1,23 +1,23 @@
 /**
  * Modul mit Anwendungsweit verwendeten Methoden
- * @module src/utilities/global
+ * @global
  */
 
 /**
- * Normalisiert eine URL, indem ein eventueller / am Ende entfernt wird
- * @param {string} url Die URL
- * @returns {string} Die normalisierte URL
+ * Normalises an URL by removing a trailing slash
+ * @param {string} url The URL
+ * @returns {string} The normalised URL
  */
 export function normURLS(url) {
     return url.replace(/\/$/, "");
 }
 
 /**
- * Gibt den aktuellen Wert einer CSS-Variable zurück. Ausgewertet auf dem body.
+ * Returns current value of css variable for the body
  * @example
  * let bootstrapPrimary = getCSSVariable('primary');
- * @param {string} variable Die Variable, ohne die zwei führenden Bindestriche
- * @returns {string} Der Wert der Variable
+ * @param {string} variable The variable
+ * @returns {string} The value of the variable
  */
 export function getCSSVariable(variable) {
     return getComputedStyle(document.body).getPropertyValue('--' + variable);
@@ -25,7 +25,6 @@ export function getCSSVariable(variable) {
 
 /**
  * Options for Efa-Files
- * @type {{types: [{description: string, accept: {}]}}
  */
 export const fileOptions = {
     types: [
@@ -39,9 +38,9 @@ export const fileOptions = {
 };
 
 /**
- * Bestimmt, ob eine Farbe hell oder dunkel ist
- * @param {string} color Die Farbe
- * @returns {boolean} Gibt ``true`` zurück, wenn die Farbe hell ist
+ * Use to check if a color is light or dark
+ * @param {string} color The color
+ * @returns {boolean} Returns ``true`` if the color is light
  */
 export function isLightColor(color) {
 
