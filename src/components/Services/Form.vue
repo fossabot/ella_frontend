@@ -139,10 +139,10 @@ export default {
         // Antwort bearbeiten
         switch (res.data.type) {
           case 'email':
-            window.open(`mailto:?subject=Fragebogen%20teilen&body=${res.data.content}`);
+            window.open(`mailto:?subject=Fragebogen%20teilen&body=${res.data.content}`, '_blank');
             break;
           case 'link':
-            window.open(res.data.content);
+            window.open(res.data.content, '_blank');
             break;
 
           case 'file':
