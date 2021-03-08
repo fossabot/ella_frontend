@@ -24,29 +24,30 @@
                            @submitModal="submitModal"/>
       </div>
     </json-form>
-    <b-modal centered v-model="showPdfViewer" title="PDF Dokument" size="xl" hide-footer>
-      <template #modal-header>
-        <div>
-          <h5 class="mb-0">PDF Dokument</h5>
-          <p class="text-muted m-0">Wählen Sie zum Drucken das Drucker-Symbol auf der rechten Seite</p>
-        </div>
-        <b-button-close @click="showPdfViewer=false"></b-button-close>
-      </template>
-      <div id="viewerContent" class="m-n3">
-        <iframe style="height:75vh; width: 100%; max-width: 100% !important;"
-                :src="'/pdf/web/viewer.html?file='+pdfData" allowfullscreen>
-          <p>This browser does not support PDF!</p>
-        </iframe>
+<!--    <b-modal centered v-model="showPdfViewer" title="PDF Dokument" size="xl" hide-footer>-->
+<!--      <template #modal-header>-->
+<!--        <div>-->
+<!--          <h5 class="mb-0">PDF Dokument</h5>-->
+<!--          &lt;!&ndash;          <p class="text-muted m-0">Wählen Sie zum Drucken das Drucker-Symbol auf der rechten Seite</p>&ndash;&gt;-->
+<!--        </div>-->
+<!--        <b-button-close @click="showPdfViewer=false"></b-button-close>-->
+<!--      </template>-->
+<!--      <div id="viewerContent" class="m-n3">-->
 
-<!--                <iframe style="height:80vh" :src="pdfData" allowfullscreen>-->
+<!--                <iframe style="height:75vh; width: 100%; max-width: 100% !important;"-->
+<!--                        :src="'/pdf/web/viewer.html?file='+pdfData" allowfullscreen>-->
 <!--                  <p>This browser does not support PDF!</p>-->
 <!--                </iframe>-->
 
-        <!--                <object style="height:80vh" :data="pdfData" type="application/pdf" width="100%" height="100%">-->
-        <!--                  <p>Ihr Browser unterstützt das Anzeigen von pdfs nicht</p>-->
-        <!--                </object>-->
-      </div>
-    </b-modal>
+<!--        &lt;!&ndash;                <iframe style="height:80vh" :src="pdfData" allowfullscreen>&ndash;&gt;-->
+<!--        &lt;!&ndash;                  <p>This browser does not support PDF!</p>&ndash;&gt;-->
+<!--        &lt;!&ndash;                </iframe>&ndash;&gt;-->
+
+<!--        &lt;!&ndash;                <object style="height:80vh" :data="pdfData" type="application/pdf" width="100%" height="100%">&ndash;&gt;-->
+<!--        &lt;!&ndash;                  <p>Ihr Browser unterstützt das Anzeigen von pdfs nicht</p>&ndash;&gt;-->
+<!--        &lt;!&ndash;                </object>&ndash;&gt;-->
+<!--      </div>-->
+<!--    </b-modal>-->
   </div>
 </template>
 
@@ -59,7 +60,7 @@ import {API_ROOT_URL, DISABLE_FORM_SAVING, INSTANCE_ID} from "../../../config";
 import {saveAs} from "file-saver";
 import {mapGetters} from "vuex";
 import ActionButtonGroup from "@/components/Services/ActionButtonGroup";
-
+import printJS from "print-js"
 
 /**
  * @module Form
@@ -193,7 +194,6 @@ export default {
         downloadLink.click();
       }
 
-
       this.$set(this.doing, this.indexOfAction, true)
       //make request to server
       axios({
@@ -239,8 +239,56 @@ export default {
               const blob = new Blob([b64toBlob(res.data.content)], {type: 'application/pdf'});
 
               // load pdf and open modal
-              this.pdfData = URL.createObjectURL(blob)
-              this.showPdfViewer = true;
+              this.pdfData = URL.createObjectURL(blob);
+              // this.showPdfViewer = true;
+
+              const isFirefox = typeof InstallTrigger !== 'undefined';
+
+              printJS({
+                printable: this.pdfData, type: "pdf", onError: function (err) {
+                  console.error(err.message);
+                  if (!isFirefox) {
+                    console.log("Failed to print, open instead...");
+                    window.open(URL.createObjectURL(blob));
+                  }
+                }
+              });
+
+              // window.open(URL.createObjectURL(blob));
+
+              // window.open(this.pdfData);
+              // wnd.print();
+              // wnd.onload = () => wnd.print();
+
+              // GlobalWorkerOptions.workerSrc = `/pdf/build/pdf.worker.js`;
+              // console.log(GlobalWorkerOptions.workerSrc)
+              // getDocument({url: this.pdfData}).promise.then(pdf => {
+              //   pdf.getPage(1).then(page => {
+              //     const scale = 1.5;
+              //     const viewport = page.getViewport({scale: scale,});
+              //
+              //     const canvas = document.getElementById('canvas');
+              //     const context = canvas.getContext('2d');
+              //     canvas.height = viewport.height;
+              //     canvas.width = viewport.width;
+              //
+              //     const renderContext = {
+              //       canvasContext: context,
+              //       viewport: viewport
+              //     };
+              //     page.render(renderContext);
+              //
+              //   });
+              // });
+              // this.showPdfViewer = true;
+              // const iframe = document.getElementById("printIframe");
+              //   iframe.onload = function () {
+              //     setTimeout(function () {
+              //     iframe.focus();
+              //     iframe.contentWindow.print();
+              //   }, 1);
+              // }
+
             } else {
               downloadBase64File(res.data.mimeType, res.data.content, res.data.fileName);
             }
@@ -301,6 +349,7 @@ export default {
 
 <style lang="scss">
 @import "../../styles";
+
 iframe {
   width: 100%;
   height: 100%;
