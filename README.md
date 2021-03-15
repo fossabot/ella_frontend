@@ -1,6 +1,6 @@
 # Ella Frontend
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/educorvi/ella_frontend)](https://github.com/educorvi/ella_frontend/releases/latest)
-[![Build Status](https://jenkins.jp-studios.de/job/ella_frontend/job/master/badge/icon)](https://jenkins.jp-studios.de/blue/organizations/jenkins/ella_frontend/branches/)
+![Build](https://github.com/educorvi/ella_frontend/actions/workflows/node.js.yml/badge.svg)
 [![GitHub issues](https://img.shields.io/github/issues/educorvi/ella_frontend)](https://github.com/educorvi/ella_frontend/issues)
 ## Project setup
 ```

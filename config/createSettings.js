@@ -6,7 +6,7 @@ const axios = require("axios");
 
 const file = "config/ella.config.js";
 
-if (process.env.JENKINS) {
+if (process.env.CI) {
     fs.copyFileSync("config/ella.config.example.js", file);
     process.exit(0);
 }
