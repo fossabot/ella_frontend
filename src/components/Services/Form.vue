@@ -309,6 +309,7 @@ iframe {
   border-bottom-right-radius: $border-radius;
 }
 
-#viewerContent {
+form > .container-fluid {
+  padding: 0;
 }
 </style>
