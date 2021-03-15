@@ -18,7 +18,8 @@
         </div>
 
 
-        <side-bar-service v-for="(service, index) in mainData.services" :key="service.name" :service="service" :no-divider="index === mainData.services.length-1"/>
+        <side-bar-service v-for="(service, index) in mainData.services" :key="service.name" :service="service"
+                          :no-divider="index === mainData.services.length-1"/>
 
       </div>
       <p class="text-muted p-5" v-else>Verbindung fehlgeschlagen</p>
@@ -70,7 +71,8 @@ export default {
     border-color: $primary;
     text-align: right;
     padding: 5px 10px;
-
+    background-color: white;
+    z-index: 10000;
   }
 }
 </style>
