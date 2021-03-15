@@ -10,8 +10,9 @@
     </b-button-group>
 
     <b-modal v-for="(action) in service['formactions']" :id="'modal_'+action.name" :key="'modal_'+action.name"
-             hide-footer title="Bitte zusätzliche Informationen angeben">
-      <json-form :json="action.additional" :onSubmit="submitModal">
+             hide-footer :title="action['modaltitle'] || 'Bitte zusätzliche Informationen angeben'">
+      <p v-if="action['modaltext']">{{action['modaltext']}}</p>
+      <json-form v-if="action.additional" :json="action.additional" :onSubmit="submitModal">
         <hr>
         <b-button-group class="w-100">
           <b-button @click="$bvModal.hide('modal_'+action.name)">Abbrechen</b-button>

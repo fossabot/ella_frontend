@@ -106,7 +106,7 @@ export default {
      */
     selected(index) {
       this.indexOfAction = index;
-      if (this.service["formactions"][this.indexOfAction].method === "REDIRECT") {
+      if (this.service["formactions"][this.indexOfAction]?.method === "REDIRECT") {
         this.$router.push("/services/" + this.service["formactions"][this.indexOfAction].name);
       }
     },
@@ -286,7 +286,7 @@ export default {
 
       } else {
         //Button action
-        if (this.service["formactions"][this.indexOfAction].additional) {
+        if (this.service["formactions"][this.indexOfAction].additional || this.service["formactions"][this.indexOfAction]['modaltext']) {
           this.$root.$bvModal.show('modal_' + this.service["formactions"][this.indexOfAction].name);
         } else {
           this.sendData(data);
