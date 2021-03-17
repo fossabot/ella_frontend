@@ -22,7 +22,7 @@
     "postdoc": "git add -A docs"
   },
   "dependencies": {
-    "@educorvi/vue-json-form": "^1.2.1",
+    "@educorvi/vue-json-form": "^1.2.2",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.17.3",
@@ -48,6 +48,7 @@
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
     "better-docs": "^2.3.2",
+    "chokidar": "^3.5.1",
     "del-cli": "^3.0.1",
     "dotenv-cli": "^4.0.0",
     "eslint": "^6.7.2",
@@ -60,7 +61,8 @@
     "sass-loader": "^10.1.1",
     "terminal-kit": "^1.45.4",
     "vue-template-compiler": "^2.6.11",
-    "wait-on": "^5.2.0"
+    "wait-on": "^5.2.0",
+    "webpack": "^4.44.2"
   },
   "eslintConfig": {
     "root": true,
