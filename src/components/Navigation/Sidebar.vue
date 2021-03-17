@@ -22,7 +22,7 @@
                           :no-divider="index === mainData.services.length-1"/>
 
       </div>
-      <p class="text-muted p-5" v-else>Verbindung fehlgeschlagen</p>
+      <div class="w-100 mt-4 text-center" v-else><b-spinner/></div>
     </b-sidebar>
   </div>
 </template>
