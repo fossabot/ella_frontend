@@ -28,7 +28,6 @@
       <template #modal-header>
         <div>
           <h5 class="mb-0">PDF Dokument</h5>
-          <p class="text-muted m-0">Wählen Sie zum Drucken das Drucker-Symbol auf der rechten Seite</p>
         </div>
         <b-button-close @click="showPdfViewer=false"></b-button-close>
       </template>
