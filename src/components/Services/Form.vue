@@ -24,6 +24,20 @@
                            @submitModal="submitModal"/>
       </div>
     </json-form>
+    <b-modal centered v-model="showPdfViewer" title="PDF Dokument" size="xl" hide-footer>
+      <template #modal-header>
+        <div>
+          <h5 class="mb-0">PDF Dokument</h5>
+        </div>
+        <b-button-close @click="showPdfViewer=false"></b-button-close>
+      </template>
+      <div id="viewerContent" class="m-n3">
+        <iframe style="height:75vh; width: 100%; max-width: 100% !important;"
+                :src="'/pdf/web/viewer.html?file='+pdfData" allowfullscreen>
+          <p>This browser does not support PDF!</p>
+        </iframe>
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -36,7 +50,6 @@ import {API_ROOT_URL, DISABLE_FORM_SAVING, INSTANCE_ID} from "../../../config";
 import {saveAs} from "file-saver";
 import {mapGetters} from "vuex";
 import ActionButtonGroup from "@/components/Services/ActionButtonGroup";
-import printJS from "print-js"
 
 /**
  * @module Form
@@ -216,19 +229,8 @@ export default {
 
               // load pdf and open modal
               this.pdfData = URL.createObjectURL(blob);
-              // this.showPdfViewer = true;
+              this.showPdfViewer = true;
 
-              const isFirefox = typeof InstallTrigger !== 'undefined';
-
-              printJS({
-                printable: this.pdfData, type: "pdf", onError: function (err) {
-                  console.error(err.message);
-                  if (!isFirefox) {
-                    console.log("Failed to print, open instead...");
-                    window.open(URL.createObjectURL(blob));
-                  }
-                }
-              });
             } else {
               downloadBase64File(res.data.mimeType, res.data.content, res.data.fileName);
             }
