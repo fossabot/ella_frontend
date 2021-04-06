@@ -6,17 +6,6 @@
   }
 }
 
-@font-face {
-  font-family: 'DGUV';
-  src: url("~@/assets/DGUVMeta-Normal.woff") format("woff");
-  src: url("~@/assets/DGUVMeta-Normal.otf") format("opentype");
-}
-
-#root {
-  font-family: DGUV, sans-serif !important;
-  font-size: 15px !important;
-}
-
 @if $primary!=#fff {
   ::-moz-selection {
     color: set-text-color($primary);
@@ -60,37 +49,12 @@ body {
   cursor: pointer;
 }
 
-#logo {
 
-}
-
-
-
-/**
-  Bootswatch Variables Import
- */
-//@import "~bootswatch/dist/superhero/variables";
-
-/**
-  Custom Variables Import
- */
-//@import "themes/bgetem/variables";
-
-
+@import 'theme/variables';
 
 //Bootstrap Import
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import 'node_modules/bootstrap-vue/src/index.scss';
 
-
-
-/**
-  Bootswatch Theme Import
- */
-//@import "~bootswatch/dist/superhero/bootswatch";
-
-/**
-  Custom Theme Import
- */
-//@import "./themes/bgetem/theme";
+@import "theme/theme";
 

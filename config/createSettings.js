@@ -3,6 +3,7 @@ const fs = require("fs");
 const term = require("terminal-kit").createTerminal();
 const waitOn = require("wait-on");
 const axios = require("axios");
+const {getAllThemes, downloadThemeRelease, installTheme} = require("./installTheme");
 
 const file = "config/ella.config.js";
 
@@ -105,15 +106,30 @@ async function configure() {
 
         await waitOn(opts);
         term("\nSoll die Speichern/Laden Funktion deaktiviert werden? [j|N]\n");
-        term.yesOrNo({yes: ['j', 'J'], no: ['n', 'N', 'ENTER']}, function (error, result) {
+        term.yesOrNo({yes: ['j', 'J'], no: ['n', 'N', 'ENTER']}, async function (error, result) {
 
             if (result) {
                 replace({files: file, from: /DISABLE_FORM_SAVING_VALUE/g, to: true});
             } else {
                 replace({files: file, from: /DISABLE_FORM_SAVING_VALUE/g, to: false});
             }
-            term.green("\nKonfiguration abgeschlossen\n");
-            process.exit(0);
+
+
+            term("\nWählen Sie ein Theme für die Anwendung\n");
+            const themes = (await getAllThemes()).map(t => t.name);
+            themes.unshift("default");
+            term.singleColumnMenu(themes, async function (error, response) {
+                // console.log(response);
+                await downloadThemeRelease("ef_theme-" + response.selectedText).catch((err) => {
+                    console.error(err);
+                    process.exit(-1)
+                });
+                await installTheme();
+
+                term.green("\nKonfiguration abgeschlossen\n");
+                process.exit(0);
+            })
+
         });
     });
 

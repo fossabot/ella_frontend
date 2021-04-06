@@ -27,3 +27,6 @@ dist.zip
 /config/ella.config.js
 /testerei/
 /.cache/
+
+/src/theme
+temp
