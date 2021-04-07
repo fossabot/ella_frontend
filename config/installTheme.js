@@ -99,7 +99,7 @@ function updateTheme() {
     console.log("downloading new version...");
     downloadThemeRelease(id).then(installTheme).catch(err => console.error(err.message));
 }
-module.exports = {getAllThemes, downloadThemeRelease, installTheme}
+module.exports = {getAllThemes, downloadThemeRelease, installTheme, initTheme}
 
 if (require.main === module) {
     const {selectReleaseAndInstall} = require('./createSettings.js')
