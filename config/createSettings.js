@@ -7,7 +7,7 @@ const {getAllThemes, downloadThemeRelease, installTheme, initTheme} = require(".
 
 const file = "config/ella.config.js";
 
-if (process.env.GHA) {
+if (process.env.CI) {
     fs.copyFileSync("config/ella.config.example.js", file);
     process.exit(0);
 }
