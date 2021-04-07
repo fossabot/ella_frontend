@@ -4,7 +4,7 @@ const extract = require('extract-zip')
 const mkdirp = require('mkdirp')
 const copyfiles = require('copyfiles')
 const rimraf = require('rimraf')
-const cf = require("create-file")
+const cf = require("create-file");
 
 function getAllThemes() {
     return new Promise((resolve, reject) => {
@@ -74,22 +74,29 @@ function installTheme() {
 
 function initTheme() {
     console.log('initializing theme');
-    cf('src/theme/theme.scss', '//Hier das Theme einfuegen\n', function (err) {
-        if (err) {
-            console.error(err);
-            return -1;
-        } else {
-            console.log('created theme.scss');
-        }
-    });
-    cf('src/theme/variables.scss', '//Hier die Variablen einfuegen\n', function (err) {
-        if (err) {
-            console.error(err);
-            return -1;
-        } else {
-            console.log('created variables.scss');
-        }
-    });
+    return Promise.all([
+        new Promise((resolve, reject) => {
+            cf('src/theme/theme.scss', '//Hier das Theme einfuegen\n', function (err) {
+                if (err) {
+                    reject(err)
+                } else {
+                    console.log('created theme.scss');
+                    resolve()
+                }
+            });
+        }), 
+        new Promise((resolve, reject) => {
+            cf('src/theme/variables.scss', '//Hier die Variablen einfuegen\n', function (err) {
+                if (err) {
+                    reject(err)
+                } else {
+                    console.log('created variables.scss');
+                    resolve()
+                }
+            });
+        })
+    ])
+    
 }
 
 
