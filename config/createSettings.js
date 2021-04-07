@@ -25,6 +25,7 @@ function selectReleaseAndInstall() {
             themes.unshift("default");
             term.singleColumnMenu(themes, async function (error, response) {
                 // console.log(response);
+                rimraf.sync("src/theme/*");
                 if(await downloadThemeRelease("ef_theme-" + response.selectedText).catch(reject)) await installTheme().catch(reject);
                 resolve();
             })
