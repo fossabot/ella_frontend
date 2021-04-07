@@ -3,15 +3,10 @@ const fs = require("fs");
 const term = require("terminal-kit").createTerminal();
 const waitOn = require("wait-on");
 const axios = require("axios");
-const {getAllThemes, downloadThemeRelease, installTheme} = require("./installTheme");
+const {getAllThemes, downloadThemeRelease, installTheme, initTheme} = require("./installTheme");
 const rimraf = require('rimraf')
 
 const file = "config/ella.config.js";
-
-if (process.env.GHA) {
-    fs.copyFileSync("config/ella.config.example.js", file);
-    process.exit(0);
-}
 
 function normURLS(url) {
     return url.replace(/\/$/, "");
@@ -26,7 +21,7 @@ function selectReleaseAndInstall() {
             term.singleColumnMenu(themes, async function (error, response) {
                 // console.log(response);
                 rimraf.sync("src/theme/*");
-                if(await downloadThemeRelease("ef_theme-" + response.selectedText).catch(reject)) await installTheme().catch(reject);
+                if (await downloadThemeRelease("ef_theme-" + response.selectedText).catch(reject)) await installTheme().catch(reject);
                 resolve();
             })
         }).catch(reject);
@@ -47,12 +42,12 @@ async function configure() {
         input = await term.inputField(
             {autoCompleteMenu: false}
         ).promise;
-        try{
+        try {
             var res = await axios.get(input);
             if (res.status !== 200) {
                 input = null;
             }
-        }catch (e) {
+        } catch (e) {
             input = null;
         }
         if (input === null) {
@@ -69,12 +64,12 @@ async function configure() {
         input = await term.inputField(
             {autoCompleteMenu: false}
         ).promise;
-        try{
+        try {
             res = await axios.get(normURLS(url) + "/" + input);
             if (res.status !== 200) {
                 input = null;
             }
-        }catch (e) {
+        } catch (e) {
             input = null;
         }
         if (input === null) {
@@ -140,7 +135,11 @@ async function configure() {
 
 }
 
-if (require.main === module) {
+if (process.env.CI) {
+    console.log('copy example settings...')
+    fs.copyFileSync("config/ella.config.example.js", file);
+    initTheme().then(()=>process.exit(0))
+} else if (require.main === module) {
     if (process.argv[2] === "--override") {
         fs.unlinkSync(file);
         configure();
