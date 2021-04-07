@@ -14,7 +14,8 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      CI: true
+      CI: false
+      GHA: true
 
     strategy:
       matrix:
