@@ -84,7 +84,7 @@ function initTheme() {
                     resolve()
                 }
             });
-        }), 
+        }),
         new Promise((resolve, reject) => {
             cf('src/theme/variables.scss', '//Hier die Variablen einfuegen\n', function (err) {
                 if (err) {
@@ -96,7 +96,7 @@ function initTheme() {
             });
         })
     ])
-    
+
 }
 
 
@@ -113,7 +113,7 @@ function updateTheme() {
 }
 module.exports = { getAllThemes, downloadThemeRelease, installTheme, initTheme }
 
-if (process.argv[2]) {
+if (require.main === module) {
     const { selectReleaseAndInstall } = require('./createSettings.js')
     switch (process.argv[2]) {
         case "install":

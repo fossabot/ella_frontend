@@ -135,6 +135,8 @@ async function configure() {
 
 }
 
+module.exports = {selectReleaseAndInstall};
+
 if (process.env.CI) {
     console.log('copy example settings...')
     fs.copyFileSync("config/ella.config.example.js", file);
@@ -162,4 +164,3 @@ if (process.env.CI) {
     }
 }
 
-module.exports = {selectReleaseAndInstall};
