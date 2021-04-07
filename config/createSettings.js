@@ -137,30 +137,30 @@ async function configure() {
 
 module.exports = {selectReleaseAndInstall};
 
-if (process.env.CI) {
-    console.log('copy example settings...')
-    fs.copyFileSync("config/ella.config.example.js", file);
-    initTheme().then(()=>process.exit(0))
-} else if (require.main === module) {
-    if (process.argv[2] === "--override") {
-        fs.unlinkSync(file);
-        configure();
-    }
+if(require.main === module){
+    if (process.env.CI) {
+        console.log('copy example settings...')
+        fs.copyFileSync("config/ella.config.example.js", file);
+        initTheme().then(() => process.exit(0))
+    } else {
+        if (process.argv[2] === "--override") {
+            fs.unlinkSync(file);
+            configure();
+        }else if (!fs.existsSync(file)) {
+            term.inverse('Es wurde kein config file gefunden! Konfiguration starten? [J|n]\n');
 
-    if (!fs.existsSync(file)) {
-        term.inverse('Es wurde kein config file gefunden! Konfiguration starten? [J|n]\n');
+            term.yesOrNo({yes: ['j', 'ENTER', 'J'], no: ['n', 'N']}, function (error, result) {
 
-        term.yesOrNo({yes: ['j', 'ENTER', 'J'], no: ['n', 'N']}, function (error, result) {
-
-            if (result) {
-                term("Die Konfiguration wird gestartet\n");
-                configure();
-            } else {
-                term("Die Konfiguration wird übersprungen.\n");
-                term.red("Denken Sie daran, die config Datei wie im README beschrieben zu erstellen, da Ella sonst nicht funktionieren wird!\n");
-                process.exit(0);
-            }
-        });
+                if (result) {
+                    term("Die Konfiguration wird gestartet\n");
+                    configure();
+                } else {
+                    term("Die Konfiguration wird übersprungen.\n");
+                    term.red("Denken Sie daran, die config Datei wie im README beschrieben zu erstellen, da Ella sonst nicht funktionieren wird!\n");
+                    process.exit(0);
+                }
+            });
+        }
     }
 }
 
