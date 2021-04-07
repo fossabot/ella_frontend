@@ -3,12 +3,13 @@ const fs = require("fs");
 const term = require("terminal-kit").createTerminal();
 const waitOn = require("wait-on");
 const axios = require("axios");
-const {getAllThemes, downloadThemeRelease, installTheme} = require("./installTheme");
+const {getAllThemes, downloadThemeRelease, installTheme, initTheme} = require("./installTheme");
 
 const file = "config/ella.config.js";
 
 if (process.env.CI) {
     fs.copyFileSync("config/ella.config.example.js", file);
+    initTheme();
     process.exit(0);
 }
 
