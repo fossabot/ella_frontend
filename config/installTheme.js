@@ -89,6 +89,10 @@ function initTheme() {
 
 
 function updateTheme() {
+    if (!fs.existsSync("src/theme/theme.json")) {
+        console.log('No theme.json file found');
+        return;
+    }
     const id = JSON.parse(fs.readFileSync("src/theme/theme.json")).id;
     console.log("delete old version...");
     rimraf.sync("src/theme/*");
