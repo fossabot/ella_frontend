@@ -8,6 +8,7 @@
     "createSettings:override": "node config/createSettings.js --override",
     "theme:init": "node config/installTheme.js init",
     "theme:install": "node config/installTheme.js install",
+    "theme:select": "node config/installTheme.js select",
     "theme:update": "node config/installTheme.js update",
     "serve": "vue-cli-service serve",
     "prebuild": "npm run compileSW",

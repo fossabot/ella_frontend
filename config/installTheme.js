@@ -21,7 +21,7 @@ function getAllThemes() {
 
 function downloadThemeRelease(id) {
     return new Promise((resolve, reject) => {
-        if(id === 'ef_theme-default') resolve();
+        if(id === 'ef_theme-default') resolve(false);
         axios.get(`https://api.github.com/repos/educorvi/${id}/releases`).then(res => {
             if (res.status !== 200) reject("Could not get releases")
             const release = res.data[0];
@@ -95,11 +95,19 @@ function updateTheme() {
     console.log("downloading new version...");
     downloadThemeRelease(id).then(installTheme).catch(err => console.error(err.message));
 }
+module.exports = {getAllThemes, downloadThemeRelease, installTheme}
 
 if (require.main === module) {
+    const {selectReleaseAndInstall} = require('./createSettings.js')
     switch (process.argv[2]) {
         case "install":
             downloadTheme(process.argv[3]).then(installTheme).catch(err => console.error(err.message));
+            break;
+        case "select":
+            selectReleaseAndInstall().catch((err) => {
+                console.error(err)
+                process.exit(-1);
+            }).then(() => process.exit(0));
             break;
         case "update":
             updateTheme();
@@ -112,4 +120,3 @@ if (require.main === module) {
     }
 
 }
-module.exports = {getAllThemes, downloadThemeRelease, installTheme}

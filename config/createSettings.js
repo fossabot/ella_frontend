@@ -16,6 +16,21 @@ function normURLS(url) {
     return url.replace(/\/$/, "");
 }
 
+function selectReleaseAndInstall() {
+    return new Promise(((resolve, reject) => {
+        term("\nWählen Sie ein Theme für die Anwendung\n");
+        getAllThemes().then(res => {
+            const themes = res.map(t => t.name);
+            themes.unshift("default");
+            term.singleColumnMenu(themes, async function (error, response) {
+                // console.log(response);
+                if(await downloadThemeRelease("ef_theme-" + response.selectedText).catch(reject)) await installTheme().catch(reject);
+                resolve();
+            })
+        }).catch(reject);
+    }));
+}
+
 async function configure() {
     const opts = {resources: ["config/ella.config.js"]};
 
@@ -115,20 +130,7 @@ async function configure() {
             }
 
 
-            term("\nWählen Sie ein Theme für die Anwendung\n");
-            const themes = (await getAllThemes()).map(t => t.name);
-            themes.unshift("default");
-            term.singleColumnMenu(themes, async function (error, response) {
-                // console.log(response);
-                await downloadThemeRelease("ef_theme-" + response.selectedText).catch((err) => {
-                    console.error(err);
-                    process.exit(-1)
-                });
-                await installTheme();
-
-                term.green("\nKonfiguration abgeschlossen\n");
-                process.exit(0);
-            })
+            await selectReleaseAndInstall();
 
         });
     });
@@ -156,3 +158,6 @@ if (!fs.existsSync(file)) {
         }
     });
 }
+
+
+module.exports = {selectReleaseAndInstall};
