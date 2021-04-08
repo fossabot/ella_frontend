@@ -127,8 +127,7 @@ async function configure() {
             }
 
 
-            await selectReleaseAndInstall();
-
+            selectReleaseAndInstall().then(() => process.exit(0)).catch(() => process.exit(-1));
         });
     });
 
@@ -137,7 +136,7 @@ async function configure() {
 
 module.exports = {selectReleaseAndInstall};
 
-if(require.main === module){
+if (require.main === module) {
     if (process.env.CI) {
         console.log('copy example settings...')
         fs.copyFileSync("config/ella.config.example.js", file);
@@ -146,7 +145,7 @@ if(require.main === module){
         if (process.argv[2] === "--override") {
             fs.unlinkSync(file);
             configure();
-        }else if (!fs.existsSync(file)) {
+        } else if (!fs.existsSync(file)) {
             term.inverse('Es wurde kein config file gefunden! Konfiguration starten? [J|n]\n');
 
             term.yesOrNo({yes: ['j', 'ENTER', 'J'], no: ['n', 'N']}, function (error, result) {
