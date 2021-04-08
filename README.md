@@ -16,11 +16,22 @@ Ein Beispiel befindet sich in `config/ella.config.example.js`.
   
 Änderung des Logos
 - Das Logo kann ersetzt werden, indem man die entsprechenden Dateien überschrieben werden. Die Bild sollte mindestens 512x512 Pixel groß sein.
-  - Generelles Logo der App:  ``src/assets/AppLogo.png`` überschreibt. 
-- Sollte das Logo ersetzt worden sein, muss anschließend der Befehl ``npm run generateIcons`` ausgeführt werden, um die benötigten Icons aus dem Logo zu generieren.
+  - Generelles Logo der App: ``src/assets/AppLogo.png``
+  - Logo für die Navbar: ``src/assets/HeadLogo.png``
+- Sollte das AppLogo ersetzt worden sein, muss anschließend der Befehl ``npm run generateIcons`` ausgeführt werden, um die benötigten Icons aus dem Logo zu generieren.
 
-Bearbeiten der Datei ``src/styles.scss``:  
-Hier können tiefergehende stilistische Änderungen vorgenommen oder auch ganze neue Themes z. B. von [Bootswatch](https://bootswatch.com/) eingebunden werden. 
+#### Styling
+Im Ordner ``src/theme`` befinden sich nach der Installation die Dateien ``variables.scss`` und ``theme.scss`` in der entsprechend Variablen hinzugefügt und überschrieben werden können, sowie ein Änderungen am Theme gemacht werden können.
+
+Sollte der Ordner ``src/theme`` gelöscht worden sein, muss er mit ``npm run theme:init`` wieder initialisiert werden. Weiterhin gibt es auch einige weitere Befehle zur Theme-Verwaltung, hier eine Übersicht:
+``` bash
+npm run theme:init     #Initialisiert den Theme Ordner
+npm run theme:select   #Stellt alle bereitgestellten Themes zur Auswahl und installiert das gewählte
+npm run theme:update   #Updated ein mittels 'npm run theme:select' installiertes Theme
+npm run theme:install  #Installiert ein Theme von einer URL, die auf eine zip Datei zeigt
+```
+
+Neue Themes können zur Auswahl bereitgestellt werden, indem sie als Repository in der Educorvi Organization auf Github veröffentlicht werden. Hierbei muss der Name des Repositorys dem Schema ``ef_theme-<name>`` entsprechen. Es wird immer der neueste Release heruntergeladen.
 ### Production Build
 ```
 npm run build
