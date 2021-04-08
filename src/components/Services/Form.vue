@@ -24,7 +24,7 @@
                            @submitModal="submitModal"/>
       </div>
     </json-form>
-    <b-modal centered v-model="showPdfViewer" title="PDF Dokument" size="xl" hide-footer>
+    <b-modal v-model="showPdfViewer" centered hide-footer size="xl" title="PDF Dokument">
       <template #modal-header>
         <div>
           <h5 class="mb-0">PDF Dokument</h5>
@@ -32,8 +32,8 @@
         <b-button-close @click="showPdfViewer=false"></b-button-close>
       </template>
       <div id="viewerContent" class="m-n3">
-        <iframe style="height:75vh; width: 100%; max-width: 100% !important;"
-                :src="'/pdf/web/viewer.html?file='+pdfData" allowfullscreen>
+        <iframe :src="'/pdf/web/viewer.html?file='+pdfData"
+                allowfullscreen style="height:75vh; width: 100%; max-width: 100% !important;">
           <p>This browser does not support PDF!</p>
         </iframe>
       </div>
@@ -96,9 +96,6 @@ export default {
      */
     selected(index) {
       this.indexOfAction = index;
-      if (this.service["formactions"][this.indexOfAction]?.method === "REDIRECT") {
-        this.$router.push("/services/" + this.service["formactions"][this.indexOfAction].name);
-      }
     },
     /**
      * Add the loaded data to json schema to load files
@@ -266,19 +263,26 @@ export default {
         await writable.close();
       }
 
-      // Speichern
-      if (this.indexOfAction === 'save') {
+
+
+      const method = this.service["formactions"][this.indexOfAction]?.method;
+      if (method === 'SAVE') {
+        // Speichern
         if (window.showSaveFilePicker !== undefined) {
           save();
         } else {
           saveAs(new Blob([JSON.stringify(toSave)], {type: "application/efa"}), this.service.title.replace(/ /g, "_") + ".efa");
         }
-
+      } else if (method === "REDIRECT") {
+        //Redirect
+        this.$router.push("/services/" + this.service["formactions"][this.indexOfAction].name);
       } else {
         //Button action
         if (this.service["formactions"][this.indexOfAction].additional || this.service["formactions"][this.indexOfAction]['modaltext']) {
+          //Wenn Modal angezeigt werden soll, wird hier das Modal geöffnet
           this.$root.$bvModal.show('modal_' + this.service["formactions"][this.indexOfAction].name);
         } else {
+          //Request an das Backend
           this.sendData(data);
         }
       }

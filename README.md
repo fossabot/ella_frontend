@@ -15,7 +15,8 @@ Der Konfigurator kann durch Löschen von `config/ella.config.js` und anschließe
 Ein Beispiel befindet sich in `config/ella.config.example.js`.
   
 Änderung des Logos
-- Das Logo kann ersetzt werden, indem man die Datei ``src/assets/logo.png`` überschreibt. Das Bild sollte mindestens 512x512 Pixel groß sein.
+- Das Logo kann ersetzt werden, indem man die entsprechenden Dateien überschrieben werden. Die Bild sollte mindestens 512x512 Pixel groß sein.
+  - Generelles Logo der App:  ``src/assets/AppLogo.png`` überschreibt. 
 - Sollte das Logo ersetzt worden sein, muss anschließend der Befehl ``npm run generateIcons`` ausgeführt werden, um die benötigten Icons aus dem Logo zu generieren.
 
 Bearbeiten der Datei ``src/styles.scss``:  

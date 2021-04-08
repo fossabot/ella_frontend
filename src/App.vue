@@ -115,8 +115,12 @@ export default {
 }
 
 .main {
-  max-width: 900px;
-  padding: 8px 12px;
+  max-width: $maxContentWidth;
+  @extend .pt-3;
+  @extend .pb-3;
+  @extend .pl-3;
+  @extend .pr-3;
+  //padding: 8px 12px;
   //text-align: center;
 }
 

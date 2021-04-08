@@ -1,3 +1,11 @@
+@import '~@/theme/variables';
+
+$maxContentWidth: 900px;
+
+//Bootstrap Import
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
 @function set-text-color($color) {
   @if (lightness( $color ) > 40) {
     @return black;
@@ -48,13 +56,6 @@ body {
 .clickable {
   cursor: pointer;
 }
-
-
-@import '~@/theme/variables';
-
-//Bootstrap Import
-@import 'node_modules/bootstrap/scss/bootstrap';
-@import 'node_modules/bootstrap-vue/src/index.scss';
 
 @import "~@/theme/theme";
 
