@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <b-button-group :vertical="stacked" class="w-100 mb-5 mt-2">
+  <div class="w-100">
+    <b-button-group :vertical="stacked" class="mb-5 mt-2 w-100">
       <b-button v-for="(action, index) in service['formactions']" :key="action.name" :disabled="doing[index]"
                 :variant="action['cssclass']"
                 type="submit" @click="selected(index)">
