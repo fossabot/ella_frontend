@@ -4,9 +4,10 @@
       <b-row align-v="center" class="clickable" @click="action">
         <b-col cols="1">
           <div class="pl-2">
-            <div id="sidebarSymbol" v-if="service.type === 'group'" v-bind:class="{open: cVisible}" style="width: min-content; height: min-content">
+            <div id="sidebarSymbol" v-if="service.type === 'group'" v-bind:class="{open: cVisible}"
+                 style="width: min-content; height: min-content">
               <svg height="10" width="6" id="sidebar_triangle">
-                <polygon points="0,10 0,0 6,5" class="triangle" />
+                <polygon points="0,10 0,0 6,5" class="triangle"/>
                 -
               </svg>
             </div>
@@ -14,7 +15,7 @@
 
         </b-col>
         <b-col>
-          <div class="w-100">
+          <div class="w-100" v-bind:class="{blend: isActive&&!isLightColor}">
             <h6 class="mb-0">{{ service.title }}</h6>
             <p class="text-muted mb-0" v-if="service.description">{{ service.description }}</p>
           </div>
@@ -28,7 +29,7 @@
         </div>
       </b-collapse>
     </div>
-<!--    <hr class="m-0" v-if="!noDivider">-->
+    <!--    <hr class="m-0" v-if="!noDivider">-->
   </div>
 </template>
 
@@ -77,7 +78,7 @@ export default {
       if (this.service.type === 'group') {
         this.cVisible = !this.cVisible;
       } else {
-        this.$router.push('/services/' +this.service.name);
+        this.$router.push('/services/' + this.service.name);
       }
     }
   },
@@ -89,31 +90,45 @@ export default {
 
 <style lang="scss" scoped>
 @import "src/styles";
+
 .cust {
   text-align: left;
-  padding: 0 10px;
-  @if ($enable-rounded){
+  @if ($enable-rounded) {
     border-radius: $border-radius;
   }
 
-  @extend .pt-2;
-  @extend .pb-2;
-
+  //@extend .pt-2;
+  //@extend .pb-2;
+  //@extend .pl-2;
+  //@extend .pr-2;
+  @extend .p-2;
 
   &.active {
-    color: $primary;
-    border-color: $primary;
-    border-width: 1px;
-    border-style: solid;
+  background-color: $primary;
+}
+
+  h6 {
+    font-weight: bold;
   }
 }
+
+.blend {
+  color: white;
+
+  .text-muted {
+    color: white !important;
+  }
+}
+
 .triangle {
   fill: black;
 }
+
 #sidebarSymbol {
-  &.open{
+  &.open {
     transform: rotate(90deg);
   }
+
   transition: all 0.2s ease-in-out;
 }
 </style>
