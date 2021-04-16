@@ -14,7 +14,7 @@
 
         </b-col>
         <b-col>
-          <div class="w-100" v-bind:class="{blend: isActive&&!isLightColor}">
+          <div class="w-100">
             <h6 class="mb-0">{{ service.title }}</h6>
             <p class="text-muted mb-0" v-if="service.description">{{ service.description }}</p>
           </div>
@@ -98,23 +98,16 @@ export default {
 
   @extend .pt-2;
   @extend .pb-2;
+
+
+  &.active {
+    color: $primary;
+    font-weight: bold;
+    border-color: $primary;
+    border-width: 1px;
+    border-style: solid;
+  }
 }
-
-.active {
-  color: $primary;
-  font-weight: bold;
-  border-color: $primary;
-  border-width: 1px;
-  border-style: solid;
-}
-
-
-//.blend {
-//  color: white;
-//  .text-muted {
-//    color: white !important;
-//  }
-//}
 .triangle {
   fill: black;
 }
