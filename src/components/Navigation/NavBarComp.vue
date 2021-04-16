@@ -1,11 +1,11 @@
 <template>
   <b-navbar toggleable="true" id="navbar" :type="isLightColor?'light':'dark'" class="navbarCustom" variant="primary">
-    <b-navbar-brand>
-      <router-link to="/">
+    <router-link to="/">
+      <b-navbar-brand>
         <img v-if="img" id="logo" alt="Logo" src="@/assets/HeadLogo.png"/>
-      </router-link>
-      <span v-if="mainData && txt" class="title-text">{{ mainData.title }}</span>
-    </b-navbar-brand>
+        <span v-if="mainData && txt" class="title-text">{{ mainData.title }}</span>
+      </b-navbar-brand>
+    </router-link>
     <b-navbar-nav class="ml-auto">
       <b-navbar-toggle target="" @click="$store.commit('sidebar', true)"></b-navbar-toggle>
 <!--      <b-button id="sidebarbutton" class="float-right" variant="light" @click="$store.commit('sidebar', true)">-->

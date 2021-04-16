@@ -11,7 +11,7 @@
       <div v-if="mainData && !mainData.error">
         <div class="sidebarHead">
           <b-icon-x @click="sidebar=false" class="h4 float-left mt-2 ml-2 clickable"/>
-          <div v-if="mainData">
+          <div v-if="mainData" @click="$router.push('/')" class="clickable">
             <h4 class="mb-1">{{ mainData.title }}</h4>
             <p class="text-muted mb-0">{{ mainData.description }}</p>
           </div>
