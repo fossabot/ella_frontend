@@ -18,8 +18,10 @@
         </div>
 
 
-        <side-bar-service v-for="(service, index) in mainData.services" :key="service.name" :service="service"
-                          :no-divider="index === mainData.services.length-1"/>
+        <div class="pt-2">
+          <side-bar-service v-for="(service, index) in mainData.services" :key="service.name" :service="service"
+                            :no-divider="index === mainData.services.length-1"/>
+        </div>
 
       </div>
       <div class="w-100 mt-4 text-center" v-else><b-spinner/></div>

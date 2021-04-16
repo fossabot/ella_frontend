@@ -1,19 +1,34 @@
 <template>
   <div>
-    <div class="cust" v-bind:class="{active: isActive}" style="padding: 5px 12px">
-      <div class="w-100 clickable" v-bind:class="{blend: isActive&&!isLightColor}" @click="action">
-        <h6>{{ service.title }}</h6>
-        <p class="text-muted" v-if="service.description">{{ service.description }}</p>
-      </div>
-      <b-collapse v-model="cVisible" v-if="service.type === 'group'">
-        <b-card no-body class="mr-2 ml-2">
+    <div class="cust" v-bind:class="{active: isActive}">
+      <b-row align-v="center" class="clickable" @click="action">
+        <b-col cols="1">
+          <div class="pl-2">
+            <div id="sidebarSymbol" v-if="service.type === 'group'" v-bind:class="{open: cVisible}" style="width: min-content; height: min-content">
+              <svg height="10" width="6" id="sidebar_triangle">
+                <polygon points="0,10 0,0 6,5" class="triangle" />
+                -
+              </svg>
+            </div>
+          </div>
+
+        </b-col>
+        <b-col>
+          <div class="w-100" v-bind:class="{blend: isActive&&!isLightColor}">
+            <h6 class="mb-0">{{ service.title }}</h6>
+            <p class="text-muted mb-0" v-if="service.description">{{ service.description }}</p>
+          </div>
+        </b-col>
+      </b-row>
+      <b-collapse v-model="cVisible" v-if="service.type === 'group'" accordion="sidebar">
+        <div>
           <side-bar-service v-for="(subService, index) in service['services']"
                             :key="subService.title" :service="subService"
                             :no-divider="index === service['services'].length-1"></side-bar-service>
-        </b-card>
+        </div>
       </b-collapse>
     </div>
-    <hr class="m-0" v-if="!noDivider">
+<!--    <hr class="m-0" v-if="!noDivider">-->
   </div>
 </template>
 
@@ -66,23 +81,48 @@ export default {
       }
     }
   },
+  created() {
+    this.cVisible = this.service['services']?.map(s => s.name).includes(this.$route.params.service) || false;
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "src/styles";
 .cust {
-  text-align: right;
+  text-align: left;
   padding: 0 10px;
+  @if ($enable-rounded){
+    border-radius: $border-radius;
+  }
+
+  @extend .pt-2;
+  @extend .pb-2;
 }
 
 .active {
-  background-color: $primary;
+  color: $primary;
+  font-weight: bold;
+  border-color: $primary;
+  border-width: 1px;
+  border-style: solid;
 }
-.blend {
-  color: white;
-  .text-muted {
-    color: white !important;
+
+
+//.blend {
+//  color: white;
+//  .text-muted {
+//    color: white !important;
+//  }
+//}
+.triangle {
+  fill: black;
+}
+#sidebarSymbol {
+  &.open{
+    transform: rotate(90deg);
   }
+  transition: all 0.2s ease-in-out;
+
 }
 </style>
