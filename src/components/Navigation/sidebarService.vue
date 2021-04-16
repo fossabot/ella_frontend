@@ -102,7 +102,6 @@ export default {
 
   &.active {
     color: $primary;
-    font-weight: bold;
     border-color: $primary;
     border-width: 1px;
     border-style: solid;
@@ -116,6 +115,5 @@ export default {
     transform: rotate(90deg);
   }
   transition: all 0.2s ease-in-out;
-
 }
 </style>
