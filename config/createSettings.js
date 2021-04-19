@@ -29,6 +29,7 @@ function selectReleaseAndInstall() {
 }
 
 async function configure() {
+    term.windowTitle('Configure Ella')
     const opts = {resources: ["config/ella.config.js"]};
 
     term.dim("Datei wird kopiert...\n");
@@ -43,9 +44,12 @@ async function configure() {
             {autoCompleteMenu: false}
         ).promise;
         try {
-            var res = await axios.get(input);
+            term.dim("\nWird überprüft... ");
+            const res = await axios.get(input);
             if (res.status !== 200) {
                 input = null;
+            } else {
+                term.green("Erfolg");
             }
         } catch (e) {
             input = null;
@@ -65,9 +69,12 @@ async function configure() {
             {autoCompleteMenu: false}
         ).promise;
         try {
-            res = await axios.get(normURLS(url) + "/" + input);
+            term.dim("\nWird überprüft... ");
+            const res = await axios.get(normURLS(url) + "/" + input);
             if (res.status !== 200) {
                 input = null;
+            } else {
+                term.green("Erfolg");
             }
         } catch (e) {
             input = null;
@@ -95,6 +102,13 @@ async function configure() {
     ).promise;
     replace({files: file, from: /%THEME_COLOR%/g, to: input});
 
+    await waitOn(opts);
+    term("\nBitte geben Sie den Titel, der in der Sidebar angezeigt werden soll an. Leer lassen für einen generierten Titel.\n");
+    input = await term.inputField(
+        {autoCompleteMenu: false}
+    ).promise;
+    replace({files: file, from: /%SIDEBAR_TITLE%/g, to: input});
+
     const items = [
         "Nur das Logo",
         "Nur der Name der Anwendung, abgerufen vom Backend",
@@ -103,33 +117,29 @@ async function configure() {
 
     await waitOn(opts);
     term("\nWählen Sie die Variante der Navigationsleiste\n");
-    term.singleColumnMenu(items, async function (error, response) {
-        switch (response.selectedIndex) {
-            case 0:
-                replace({files: file, from: /"%NAVBAR_STYLE%"/g, to: "NAVBAR_VARIANTS.LOGO"});
-                break;
-            case 1:
-                replace({files: file, from: /"%NAVBAR_STYLE%"/g, to: "NAVBAR_VARIANTS.NAME"});
-                break;
-            case 2:
-                replace({files: file, from: /"%NAVBAR_STYLE%"/g, to: "NAVBAR_VARIANTS.LOGO_AND_NAME"});
-                break;
-        }
+    let response = await term.singleColumnMenu(items).promise;
+    switch (response.selectedIndex) {
+        case 0:
+            replace({files: file, from: /"%NAVBAR_STYLE%"/g, to: "NAVBAR_VARIANTS.LOGO"});
+            break;
+        case 1:
+            replace({files: file, from: /"%NAVBAR_STYLE%"/g, to: "NAVBAR_VARIANTS.NAME"});
+            break;
+        case 2:
+            replace({files: file, from: /"%NAVBAR_STYLE%"/g, to: "NAVBAR_VARIANTS.LOGO_AND_NAME"});
+            break;
+    }
 
-        await waitOn(opts);
-        term("\nSoll die Speichern/Laden Funktion deaktiviert werden? [j|N]\n");
-        term.yesOrNo({yes: ['j', 'J'], no: ['n', 'N', 'ENTER']}, async function (error, result) {
+    await waitOn(opts);
+    term("\nSoll die Speichern/Laden Funktion deaktiviert werden? [j|N]\n");
+    let result = term.yesOrNo({yes: ['j', 'J'], no: ['n', 'N', 'ENTER']}).promise;
+    if (result) {
+        replace({files: file, from: /DISABLE_FORM_SAVING_VALUE/g, to: true});
+    } else {
+        replace({files: file, from: /DISABLE_FORM_SAVING_VALUE/g, to: false});
+    }
 
-            if (result) {
-                replace({files: file, from: /DISABLE_FORM_SAVING_VALUE/g, to: true});
-            } else {
-                replace({files: file, from: /DISABLE_FORM_SAVING_VALUE/g, to: false});
-            }
-
-
-            selectReleaseAndInstall().then(() => process.exit(0)).catch(() => process.exit(-1));
-        });
-    });
+    selectReleaseAndInstall().then(() => process.exit(0)).catch(() => process.exit(-1));
 
 
 }

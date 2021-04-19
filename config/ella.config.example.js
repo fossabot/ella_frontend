@@ -64,6 +64,11 @@ const NAVBAR_STYLE = NAVBAR_VARIANTS.LOGO_AND_NAME
  */
 const DISABLE_FORM_SAVING = false
 
+/**
+ * Der Titel der Sidebar. Wenn ein leerer String gewählt wird, wird der Titel aus Name und Beschreibung der Ella-App generiert
+ * @type {string}
+ */
+const SIDEBAR_TITLE = ""
 
 
 
@@ -71,5 +76,5 @@ const DISABLE_FORM_SAVING = false
 
 
 module.exports = {
-    API_ROOT_URL, INSTANCE_ID, TITLE, THEME_COLOR, NAVBAR_STYLE, NAVBAR_VARIANTS, DISABLE_FORM_SAVING
+    API_ROOT_URL, INSTANCE_ID, TITLE, THEME_COLOR, NAVBAR_STYLE, NAVBAR_VARIANTS, DISABLE_FORM_SAVING, SIDEBAR_TITLE
 };
