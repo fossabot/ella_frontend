@@ -3,8 +3,8 @@
     <div class="cust" v-bind:class="{active: isActive}">
       <b-row align-v="center" class="clickable" @click="action">
         <b-col cols="1">
-          <div class="pl-2">
-            <div id="sidebarSymbol" v-if="service.type === 'group'" v-bind:class="{open: cVisible}"
+          <div class="pl-2 sidebarSymbolParent">
+            <div class="sidebarSymbol" v-if="service.type === 'group'" v-bind:class="{open: cVisible}"
                  style="width: min-content; height: min-content">
               <svg height="10" width="6" id="sidebar_triangle">
                 <polygon points="0,10 0,0 6,5" class="triangle"/>
@@ -124,7 +124,8 @@ export default {
   fill: black;
 }
 
-#sidebarSymbol {
+.sidebarSymbol {
+  @extend .mt-n1;
   &.open {
     transform: rotate(90deg);
   }
