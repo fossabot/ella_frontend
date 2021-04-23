@@ -2,7 +2,7 @@
   <div id="root" class="box" v-touch:swipe="swipeHandler">
     <nav-bar-comp id="top" class="topbar"/>
     <div id="app" class="main" v-if="mainData && !mainData.error">
-      <div style="max-width: 800px;">
+      <div>
         <router-view/>
       </div>
     </div>
@@ -112,16 +112,6 @@ export default {
   display: flex;
   flex-flow: column;
   align-items: center;
-}
-
-.main {
-  max-width: $maxContentWidth;
-  @extend .pt-3;
-  @extend .pb-3;
-  @extend .pl-3;
-  @extend .pr-3;
-  //padding: 8px 12px;
-  //text-align: center;
 }
 
 .hider {

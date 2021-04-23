@@ -1,7 +1,6 @@
-@import '~@/theme/variables';
-
 $maxContentWidth: 900px;
 
+@import '~@/theme/variables';
 //Bootstrap Import
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import 'node_modules/bootstrap-vue/src/index.scss';
@@ -47,6 +46,17 @@ $border-radius-scroll: 0px;
 body {
   padding: 0;
   margin: 0;
+}
+
+
+.main {
+  max-width: $maxContentWidth;
+  @extend .pt-3;
+  @extend .pb-3;
+  @extend .pl-3;
+  @extend .pr-3;
+  //padding: 8px 12px;
+  //text-align: center;
 }
 
 #top {
