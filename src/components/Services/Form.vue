@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div id="formHead">
       <h2 class="mt-3">{{ service.title }}</h2>
       <p class="text-muted">{{ service.description }}</p>
       <div v-if="!DISABLE_FORM_SAVING">
