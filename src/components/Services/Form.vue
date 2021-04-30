@@ -193,7 +193,22 @@ export default {
         // interpret answer
         switch (res.data.type) {
           case 'email':
-            window.location.href = `mailto:?subject=Fragebogen%20teilen&body=${res.data.content}`;
+            window.location.href = `mailto:?subject=Formular%20teilen&body=${res.data.content}`;
+            break;
+          case 'share':
+            // eslint-disable-next-line no-case-declarations
+            const shareObject = {
+              title: 'Formular teilen',
+              text: res.data.content,
+            };
+            if (navigator.canShare && navigator.canShare(shareObject)) {
+              navigator.share(shareObject)
+                  .then(() => console.log('Share was successful.'))
+                  .catch((error) => console.log('Sharing failed', error));
+            } else {
+              console.log(`Your system doesn't support sharing files.`);
+              window.location.href = `mailto:?subject=Formular%20teilen&body=${res.data.content}`;
+            }
             break;
           case 'link':
             window.location.href = res.data.content;
