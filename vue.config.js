@@ -45,7 +45,8 @@ module.exports = {
     css: {
         loaderOptions: {
             sass: {
-                additionalData: THEME_COLOR ? '$primary: ' + THEME_COLOR + ";" : ""
+                additionalData: THEME_COLOR ? '$primary: ' + THEME_COLOR + ";" : "",
+                implementation: require('sass'),
             },
         },
     },
