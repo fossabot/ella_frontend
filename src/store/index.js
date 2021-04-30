@@ -28,7 +28,13 @@ export default new Vuex.Store({
          * Is the page loading?
          * @type {boolean}
          */
-        load: false
+        load: false,
+
+        /**
+         * If HTML is returned from a request and should be rendered it's saved here and the html route is opened
+         * @type {string}
+         */
+        customHTML: ""
     },
     mutations: {
         /**
@@ -54,6 +60,15 @@ export default new Vuex.Store({
          */
         load(state, data) {
             state.load = data;
+        },
+
+        /**
+         * Sets customHTML
+         * @param state
+         * @param data
+         */
+        customHTML(state, data) {
+            state.customHTML = data;
         }
     },
     actions: {},
@@ -61,6 +76,7 @@ export default new Vuex.Store({
     getters: {
         mainData: state => state.mainData,
         sidebar: state => state.sidebar,
-        load: state => state.load
+        load: state => state.load,
+        customHTML: state => state.customHTML
     }
 })

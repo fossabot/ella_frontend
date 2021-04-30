@@ -26,10 +26,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "load" */ '../views/Load')
   },
   {
+    path: '/html',
+    name: "HTML",
+    component: () => import(/* webpackChunkName: "htmlResponse" */ '../views/HTMLResponse')
+  },
+  {
     path: '*',
     name: '404',
     component: () => import(/* webpackChunkName: "notFound" */ '../views/notFound')
-
   }
 ]
 

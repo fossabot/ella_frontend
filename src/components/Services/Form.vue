@@ -34,7 +34,7 @@
       <div id="viewerContent" class="m-n3">
         <iframe :src="'/pdf/web/viewer.html?file='+pdfData"
                 allowfullscreen style="height:75vh; width: 100%; max-width: 100% !important;">
-          <p>This browser does not support PDF!</p>
+          This browser does not support PDF!
         </iframe>
       </div>
     </b-modal>
@@ -215,6 +215,10 @@ export default {
             break;
 
           case 'file':
+            if (res.data.mimeType === "text/html") {
+              this.$store.commit("customHTML", res.data.content);
+              this.$router.push('/html');
+            }
             if (res.data.mimeType === "application/pdf") {
 
               // create blob from base64
