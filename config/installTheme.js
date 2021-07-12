@@ -13,7 +13,7 @@ function getAllThemes() {
             const themes = res.data.filter(t => t.name.match(/^ef_theme/));
             if (!themes.length) reject("No Themes Found")
             resolve(themes.map(t => {
-                return { id: t.name, name: t.name.replace(/ef_theme-/, "") }
+                return {id: t.name, name: t.name.replace(/ef_theme-/, "")}
             }));
         }).catch(reject);
     });
@@ -60,7 +60,7 @@ function installTheme() {
     return new Promise((resolve, reject) => {
         (async function () {
             console.log("unzipping...")
-            await extract("temp/theme.zip", { dir: process.cwd() + "/temp" })
+            await extract("temp/theme.zip", {dir: process.cwd() + "/temp"})
             console.log("copying files...")
             copyfiles(["temp/*-ef_theme-*/**/*", "src/theme/"], 2, err => {
                 if (err) reject(err);
@@ -111,19 +111,24 @@ function updateTheme() {
     console.log("downloading new version...");
     downloadThemeRelease(id).then(installTheme).catch(err => console.error(err.message));
 }
-module.exports = { getAllThemes, downloadThemeRelease, installTheme, initTheme }
+
+module.exports = {getAllThemes, downloadThemeRelease, installTheme, initTheme}
 
 if (require.main === module) {
-    const { selectReleaseAndInstall } = require('./createSettings.js')
+    const {selectReleaseAndInstall} = require('./createSettings.js')
     switch (process.argv[2]) {
         case "install":
             downloadTheme(process.argv[3]).then(installTheme).catch(err => console.error(err.message));
             break;
         case "select":
-            selectReleaseAndInstall().catch((err) => {
-                console.error(err)
-                process.exit(-1);
-            }).then(() => process.exit(0));
+            if (process.argv[3]) {
+                downloadThemeRelease("ef_theme-"+process.argv[3])
+            } else {
+                selectReleaseAndInstall().catch((err) => {
+                    console.error(err)
+                    process.exit(-1);
+                }).then(() => process.exit(0));
+            }
             break;
         case "update":
             updateTheme();
