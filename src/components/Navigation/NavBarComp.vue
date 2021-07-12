@@ -7,10 +7,14 @@
       </b-navbar-brand>
     </router-link>
     <b-navbar-nav class="ml-auto">
-      <b-navbar-toggle target="" @click="$store.commit('sidebar', true)"></b-navbar-toggle>
-<!--      <b-button id="sidebarbutton" class="float-right" variant="light" @click="$store.commit('sidebar', true)">-->
-<!--        <b-icon-justify/>-->
-<!--      </b-button>-->
+      <div id="menueicon">
+        <b-navbar-toggle target="" @click="$store.commit('sidebar', true)"></b-navbar-toggle>
+        <p>Menü</p>
+      </div>
+
+      <!--      <b-button id="sidebarbutton" class="float-right" variant="light" @click="$store.commit('sidebar', true)">-->
+      <!--        <b-icon-justify/>-->
+      <!--      </b-button>-->
     </b-navbar-nav>
   </b-navbar>
 </template>
@@ -55,5 +59,16 @@ export default {
 #logo {
   height: 40px;
   margin-right: 25px;
+}
+
+#menueicon {
+  display: flex;
+  align-items: center;
+
+  p {
+    margin: 0;
+    margin-left: -5px;
+    display: none;
+  }
 }
 </style>
