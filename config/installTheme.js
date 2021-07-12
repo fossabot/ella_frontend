@@ -62,7 +62,7 @@ function installTheme() {
             console.log("unzipping...")
             await extract("temp/theme.zip", { dir: process.cwd() + "/temp" })
             console.log("copying files...")
-            copyfiles(["temp/*-ef_theme-*/*", "src/theme/"], 2, err => {
+            copyfiles(["temp/*-ef_theme-*/**/*", "src/theme/"], 2, err => {
                 if (err) reject(err);
                 console.log("cleaning up...")
                 rimraf.sync('temp');
