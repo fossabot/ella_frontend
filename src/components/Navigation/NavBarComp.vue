@@ -7,8 +7,8 @@
       </b-navbar-brand>
     </router-link>
     <b-navbar-nav class="ml-auto">
-      <div id="menueicon">
-        <b-navbar-toggle target="" @click="$store.commit('sidebar', true)"></b-navbar-toggle>
+      <div id="menueicon" @click="$store.commit('sidebar', true)">
+        <b-navbar-toggle target=""></b-navbar-toggle>
         <p>Menü</p>
       </div>
 
@@ -64,6 +64,7 @@ export default {
 #menueicon {
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   p {
     margin: 0;
