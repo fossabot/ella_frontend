@@ -49,12 +49,9 @@ body {
 }
 
 
-.main {
+.main{
   max-width: $maxContentWidth;
-  @extend .pt-3;
-  @extend .pb-3;
-  @extend .pl-3;
-  @extend .pr-3;
+  @extend .p-3;
   //padding: 8px 12px;
   //text-align: center;
 }
@@ -65,6 +62,10 @@ body {
 
 .clickable {
   cursor: pointer;
+
+  &:focus{
+    outline: $primary solid 2px;
+  }
 }
 
 @import "~@/theme/theme";

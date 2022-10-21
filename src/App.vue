@@ -73,6 +73,7 @@ export default {
   },
   computed: {
     textVariant() {
+      console.log(isLightColor(getCSSVariable("danger")))
       return isLightColor(getCSSVariable("danger")) ? 'dark' : 'light';
     },
     ...mapGetters(["mainData"])
@@ -83,9 +84,10 @@ export default {
      * @param {String} evt The Swipe-Event
      */
     swipeHandler(evt) {
-      if (evt === "left") {
-        this.$store.commit('sidebar', true);
-      }
+      // Opens sidebar while using slider for audio, so commented out for now
+      // if (evt === "left") {
+      //   this.$store.commit('sidebar', true);
+      // }
       if (evt === "right") {
         this.$store.commit('sidebar', false);
       }
