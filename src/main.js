@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 
 import {CardPlugin, SidebarPlugin, ButtonPlugin, JumbotronPlugin, SpinnerPlugin, NavbarPlugin, BootstrapVue, BIconX, BIconJustify, BIconPlayCircle, BIconPauseCircle} from 'bootstrap-vue'
-import './styles.scss'
+import './styles.scss';
 
 // Vue.use(BootstrapVue);
 Vue.use(CardPlugin);

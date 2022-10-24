@@ -36,6 +36,8 @@
     "file-saver": "^2.0.5",
     "print-js": "^1.6.0",
     "register-service-worker": "^1.7.1",
+    "video.js": "^7.20.3",
+    "videojs-playlist": "^5.0.0",
     "vue": "^2.6.12",
     "vue-material": "^1.0.0-beta-15",
     "vue-router": "^3.2.0",

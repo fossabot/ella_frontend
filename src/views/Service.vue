@@ -27,7 +27,7 @@ export default {
         case 'group':
           return () => import(/* webpackChunkName: "Group" */ "../components/Services/Group");
         case 'media':
-          return () => import(/* webpackChunkName: "Audio" */ "../components/Services/Audio");
+          return () => import(/* webpackChunkName: "Media" */ "../components/Services/Media");
         default:
           return () => import(/* webpackChunkName: "notFound" */ "./notFound");
       }
