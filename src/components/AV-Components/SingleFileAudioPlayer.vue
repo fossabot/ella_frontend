@@ -103,7 +103,6 @@ export default {
       this.loaded = p;
     });
     this.wavesurfer.on('ready', () => {
-      console.log("ready");
       this.ready = true;
     });
 
@@ -132,6 +131,9 @@ export default {
         }
       }
     });
+  },
+  beforeDestroy() {
+    this.wavesurfer.destroy();
   },
   methods: {
     changeTime(rangeInputEvent) {
