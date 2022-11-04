@@ -107,9 +107,11 @@ export default {
     });
 
     this.wavesurfer.on('play', () => {
+      this.$emit("play")
       this.playing = true;
     });
     this.wavesurfer.on('pause', () => {
+      this.$emit("pause")
       this.playing = false;
       this.current_subtitle = null;
     });
@@ -138,6 +140,9 @@ export default {
   methods: {
     changeTime(rangeInputEvent) {
       this.wavesurfer.seekTo(rangeInputEvent.target.value/100)
+    },
+    pause() {
+      this.wavesurfer.pause();
     },
   }
 }

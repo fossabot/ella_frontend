@@ -8,7 +8,7 @@
     <span v-html="service.media.textbefore"/>
     <div v-if="service.media.type === 'audio'">
       <div v-for="(song, index) in service.media.mediafiles" :key="index+'_'+song.name">
-        <single-file-audio-player :song="song"></single-file-audio-player>
+        <single-file-audio-player @play="pauseCurrent(index)" :song="song" :ref="'player'+index"></single-file-audio-player>
       </div>
     </div>
     <video-player v-else-if="service.media.type === 'video'" :videos="service.media.mediafiles"/>
@@ -27,7 +27,20 @@ import VideoPlayer from "@/components/AV-Components/VideoPlayer";
 export default {
   name: "Media",
   components: {VideoPlayer, SingleFileAudioPlayer},
-  mixins: [serviceMixin]
+  mixins: [serviceMixin],
+  data() {
+    return {
+      runningPlayer: null
+    }
+  },
+  methods: {
+    pauseCurrent(newIndex) {
+      if (this.runningPlayer !== null && this.runningPlayer !== newIndex) {
+        this.$refs["player"+this.runningPlayer][0].pause();
+      }
+      this.runningPlayer = newIndex;
+    },
+  }
 }
 </script>
 
