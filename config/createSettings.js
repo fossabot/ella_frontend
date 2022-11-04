@@ -132,7 +132,7 @@ async function configure() {
 
     await waitOn(opts);
     term("\nSoll die Speichern/Laden Funktion deaktiviert werden? [j|N]\n");
-    let result = term.yesOrNo({yes: ['j', 'J'], no: ['n', 'N', 'ENTER']}).promise;
+    let result = await term.yesOrNo({yes: ['j', 'J'], no: ['n', 'N', 'ENTER']}).promise;
     if (result) {
         replace({files: file, from: /DISABLE_FORM_SAVING_VALUE/g, to: true});
     } else {
