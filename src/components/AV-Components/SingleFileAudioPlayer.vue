@@ -96,7 +96,8 @@ export default {
       barWidth: 4,
       normalize: true,
       height: 80,
-      cursorWidth: 0
+      cursorWidth: 0,
+      barMinHeight: 0.5
     });
     this.wavesurfer.load(this.song.url);
     this.wavesurfer.on('loading', (p) => {
