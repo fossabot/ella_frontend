@@ -103,6 +103,7 @@ export default {
       this.loaded = p;
     });
     this.wavesurfer.on('ready', () => {
+      console.log("ready");
       this.ready = true;
     });
 
@@ -112,6 +113,9 @@ export default {
     this.wavesurfer.on('pause', () => {
       this.playing = false;
       this.current_subtitle = null;
+    });
+    this.wavesurfer.on('error', (e) => {
+      console.error(e);
     });
 
 
