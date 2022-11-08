@@ -97,7 +97,8 @@ export default {
       normalize: true,
       height: 80,
       cursorWidth: 0,
-      barMinHeight: 0.5
+      barMinHeight: 0.5,
+      backend: "MediaElement"
     });
     this.wavesurfer.load(this.song.url);
     this.wavesurfer.on('loading', (p) => {
