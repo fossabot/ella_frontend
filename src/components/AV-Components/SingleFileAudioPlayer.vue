@@ -5,16 +5,18 @@
       <div :id="player_id">
         <p style="font-size: large; font-weight: bold">{{ song.title }}</p>
         <div class="audiocontrols">
-          <button aria-label="Wiedergabebutton" :aria-pressed="playing" class="play-pause-button clickable" @click="()=>wavesurfer.playPause()" style="background: transparent; border: none">
-            <b-icon-play-circle v-if="!playing" class="mediaicon playcircle" :variant="ready?'primary':'lightgrey'"
+          <button aria-label="Wiedergabebutton" :aria-pressed="playing" class="play-pause-button clickable" style="background: transparent; border: none">
+            <b-icon-play-circle @click="()=>wavesurfer.play()" v-if="!playing" class="mediaicon playcircle" :variant="ready?'primary':'lightgrey'"
                                 animation="pulse"></b-icon-play-circle>
-            <b-icon-pause-circle v-else class="mediaicon pausecircle" variant="primary"
+            <b-icon-pause-circle @click="pause" v-else class="mediaicon pausecircle" variant="primary"
                                  animation="pulse"></b-icon-pause-circle>
           </button>
           <div style="width: 85%">
             <div class="two_layers" v-show="loaded === 100">
               <div class="layer1" style="z-index: 100; background: transparent">
-                <input :aria-label="`Fortschrittseingabe für die Audiodatei ${song.title}`" :id="player_id+'_progressRange'" type="range" step=".1" value="0" style="height: 80px !important; width: 100%; padding: 0 !important;" @input="changeTime"/>
+                <input :aria-label="`Fortschrittseingabe für die Audiodatei ${song.title}`"
+                       :id="player_id+'_progressRange'" type="range" step=".1" value="0"
+                       style="height: 80px !important; width: 100%; padding: 0 !important;" @input="changeTime"/>
               </div>
               <div aria-hidden="true" class="layer2">
                 <div id="wf_container">
@@ -22,14 +24,16 @@
                 </div>
               </div>
             </div>
-            <b-progress :aria-label="`Ladefortschritt der Datei ${song.title}`" :value="loaded" :max="100" animated v-if="loaded < 100"></b-progress>
+            <b-progress :aria-label="`Ladefortschritt der Datei ${song.title}`" :value="loaded" :max="100" animated
+                        v-if="loaded < 100"></b-progress>
           </div>
         </div>
         <b-collapse class="audio_subtitle" :visible="!!current_subtitle">
           <hr>
-          <p>{{current_subtitle?.subtitle}}</p>
+          <p>{{ current_subtitle?.subtitle }}</p>
         </b-collapse>
       </div>
+      <slot></slot>
     </b-card-body>
   </b-card>
 </template>
@@ -48,6 +52,7 @@ export default {
   },
   data() {
     return {
+      autoplay: false,
       ready: false,
       loaded: 0,
       wavesurfer: null,
@@ -75,7 +80,7 @@ export default {
     }
 
     // parse srt syntax
-    this.subtitles = this.song.transcript? this.song.transcript.split("\n\n").map(block => {
+    this.subtitles = this.song.transcript ? this.song.transcript.split("\n\n").map(block => {
       const retBlock = {};
       const tmp = block.split("\n");
       retBlock.id = Number.parseInt(tmp[0]);
@@ -83,12 +88,12 @@ export default {
       retBlock.startTime = toMilliseconds(tmp[1]?.split(" --> ")[0])
       retBlock.stopTime = toMilliseconds(tmp[1]?.split(" --> ")[1])
       return retBlock;
-    }):null;
+    }) : null;
   },
   mounted() {
     // Create a wavesurfer instance for the audio file
     this.wavesurfer = WaveSurfer.create({
-      container: '#waveform_'+this.player_id,
+      container: '#waveform_' + this.player_id,
       waveColor: "lightgrey",
       progressColor: getCSSVariable("primary"),
       responsive: true,
@@ -106,11 +111,15 @@ export default {
     });
     this.wavesurfer.on('ready', () => {
       this.ready = true;
+      if (this.autoplay) {
+        this.wavesurfer.play();
+      }
     });
 
     this.wavesurfer.on('play', () => {
       this.$emit("play")
       this.playing = true;
+      this.autoplay = true;
     });
     this.wavesurfer.on('pause', () => {
       this.$emit("pause")
@@ -120,11 +129,14 @@ export default {
     this.wavesurfer.on('error', (e) => {
       console.error(e);
     });
+    this.wavesurfer.on('finish', () => {
+      this.$emit("finish")
+    });
 
 
     this.wavesurfer.on('audioprocess', (time) => {
       // update slider progress
-      document.getElementById(this.player_id + '_progressRange').value = time*100 / this.wavesurfer.getDuration();
+      document.getElementById(this.player_id + '_progressRange').value = time * 100 / this.wavesurfer.getDuration();
       // update subtitles
       if (this.subtitles) {
         for (const subtitle of this.subtitles) {
@@ -141,10 +153,19 @@ export default {
   },
   methods: {
     changeTime(rangeInputEvent) {
-      this.wavesurfer.seekTo(rangeInputEvent.target.value/100)
+      this.wavesurfer.seekTo(rangeInputEvent.target.value / 100)
     },
     pause() {
+      this.autoplay = false;
       this.wavesurfer.pause();
+    },
+  },
+  watch: {
+    song(newSong) {
+      document.getElementById(this.player_id + '_progressRange').value = 0;
+      this.loaded = 0;
+      this.ready = false;
+      this.wavesurfer.load(newSong.url);
     },
   }
 }
@@ -190,24 +211,23 @@ wave {
   height: fit-content;
 }
 
-.two_layers{
+.two_layers {
   display: grid;
 
-  .layer1, .layer2{
+  .layer1, .layer2 {
     grid-column: 1;
     grid-row: 1;
   }
 }
 
-@mixin thumb(){
+@mixin thumb() {
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
   border: 1px solid #000000;
   height: 70px;
   width: 16px;
-  @if($enable-rounded){
+  @if ($enable-rounded) {
     border-radius: $border-radius;
-  }
-  @else{
+  } @else {
     border-radius: 0;
   }
 
@@ -237,7 +257,6 @@ input[type=range] {
   }
 
 
-
   &:focus {
     outline-color: $primary; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
   }
@@ -253,7 +272,6 @@ input[type=range] {
     color: transparent;
   }
 }
-
 
 
 </style>
