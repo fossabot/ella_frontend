@@ -13,23 +13,23 @@ import {mapGetters} from "vuex";
  * @vue-computed {Object} service Searches recursively (because of groups) for the service, whose name is given by the parameter
  */
 export default {
-  name: "Service",
+  name: "ServiceView",
   computed: {
     component() {
       if (!this.service) {
-        return () => import("./notFound");
+        return () => import("./notFound.vue");
       }
       switch (this.service.type) {
         case 'page':
-          return () => import(/* webpackChunkName: "Page" */ "../components/Services/Page");
+          return () => import("../components/Services/Page.vue");
         case 'service':
-          return () => import(/* webpackChunkName: "Form" */ "../components/Services/Form");
+          return () => import("../components/Services/Form.vue");
         case 'group':
-          return () => import(/* webpackChunkName: "Group" */ "../components/Services/Group");
+          return () => import("../components/Services/Group.vue");
         case 'media':
-          return () => import(/* webpackChunkName: "Media" */ "../components/Services/Media");
+          return () => import("../components/Services/Media.vue");
         default:
-          return () => import(/* webpackChunkName: "notFound" */ "./notFound");
+          return () => import("./notFound.vue");
       }
     },
     service() {

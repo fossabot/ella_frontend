@@ -9,7 +9,7 @@
  * @description A loading view
  */
 export default {
-  name: "Load",
+  name: "LoadView",
   created() {
 
   }

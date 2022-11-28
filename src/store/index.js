@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {normURLS} from "@/utilities/globals.mjs";
+import {normURLS} from "/src/utilities/globals.mjs";
 import {API_ROOT_URL, INSTANCE_ID} from "../../config";
 import axios from "axios";
 

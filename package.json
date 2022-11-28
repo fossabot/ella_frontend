@@ -2,23 +2,21 @@
   "name": "ella",
   "version": "0.11.2",
   "private": true,
+  "type": "module",
   "scripts": {
     "postinstall": "npm run theme:init && npm run createSettings",
-    "createSettings": "node config/createSettings.js",
-    "createSettings:override": "node config/createSettings.js --override",
-    "theme:init": "node config/installTheme.js init",
-    "theme:install": "node config/installTheme.js install",
-    "theme:select": "node config/installTheme.js select",
-    "theme:update": "node config/installTheme.js update",
-    "serve": "vue-cli-service serve",
-    "prebuild": "npm run compileSW",
-    "build": "vue-cli-service build",
-    "postbuild": " npm run clean:sw",
-    "lint": "vue-cli-service lint",
-    "clean": "npm run clean:sw && npm run clean:dist",
-    "clean:sw": "del-cli service-worker.js",
+    "createSettings": "node config/createSettings.cjs",
+    "createSettings:override": "node config/createSettings.cjs --override",
+    "dev": "vite",
+    "theme:init": "node config/installTheme.cjs init",
+    "theme:install": "node config/installTheme.cjs install",
+    "theme:select": "node config/installTheme.cjs select",
+    "theme:update": "node config/installTheme.cjs update",
+    "serve": "vite preview",
+    "build": "vite build",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "clean": "npm run clean:dist",
     "clean:dist": "del-cli dist*",
-    "compileSW": "node src/utilities/compileSW.mjs",
     "generateIcons": "npx vue-pwa-asset-generator --no-manifest -a src/assets/AppLogo.png -o ./public/img/icons && cp ./public/img/icons/favicon-32x32.png public/favicon.png",
     "zip": "zip-folder dist",
     "release": "dotenv -e .env.local release-it",
@@ -31,7 +29,6 @@
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.21.2",
     "bootswatch": "^4.5.3",
-    "core-js": "^3.6.5",
     "dotenv": "^8.2.0",
     "file-saver": "^2.0.5",
     "print-js": "^1.6.0",
@@ -47,21 +44,15 @@
   },
   "devDependencies": {
     "@neferin/zip-folder": "^1.0.4",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-pwa": "^4.5.7",
-    "@vue/cli-plugin-router": "^4.5.8",
-    "@vue/cli-plugin-vuex": "^4.5.8",
-    "@vue/cli-service": "~4.5.0",
-    "babel-eslint": "^10.1.0",
+    "@vitejs/plugin-vue2": "^2.0.1",
     "better-docs": "^2.3.2",
     "chokidar": "^3.5.1",
     "copyfiles": "^2.4.1",
     "create-file": "^1.0.1",
     "del-cli": "^3.0.1",
     "dotenv-cli": "^4.0.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint": "^8.28.0",
+    "eslint-plugin-vue": "^8.7.1",
     "extract-zip": "^2.0.1",
     "jsdoc": "^3.6.6",
     "jsdoc-vuejs": "^3.0.9",
@@ -70,11 +61,10 @@
     "replace-in-file": "^6.1.0",
     "rimraf": "^3.0.2",
     "sass": "^1.32.12",
-    "sass-loader": "^10.1.1",
     "terminal-kit": "^2.0.7",
-    "vue-template-compiler": "^2.6.11",
-    "wait-on": "^5.2.0",
-    "webpack": "^4.44.2"
+    "vite": "^3.2.4",
+    "vite-plugin-pwa": "^0.13.3",
+    "wait-on": "^5.2.0"
   },
   "engines": {
     "node": ">=14"
@@ -82,15 +72,12 @@
   "eslintConfig": {
     "root": true,
     "env": {
-      "node": true
+      "es2021": true
     },
     "extends": [
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
     "rules": {}
   },
   "browserslist": [

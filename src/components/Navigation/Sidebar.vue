@@ -39,7 +39,7 @@
 
 <script>
 import {mapGetters} from "vuex"
-import SideBarService from "./sidebarService";
+import SideBarService from "./sidebarService.vue";
 import {SIDEBAR_TITLE} from "../../../config"
 
 /**
@@ -49,7 +49,7 @@ import {SIDEBAR_TITLE} from "../../../config"
  * @description The Sidebar of the ella-app
  */
 export default {
-  name: "Sidebar",
+  name: "SidebarComponent",
   components: {SideBarService},
   computed: {
     ...mapGetters(["mainData"]),

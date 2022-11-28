@@ -1,2 +1,2 @@
-export * from "./ella.config";
+export * from "./ella.config.js";
 

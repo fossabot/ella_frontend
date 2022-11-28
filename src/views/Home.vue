@@ -13,7 +13,7 @@ import {mapGetters} from "vuex";
  * @description The start view of the app. Renders the default service
  */
 export default {
-  name: 'Home',
+  name: 'HomeView',
   computed: {
     ...mapGetters(["mainData"])
   },

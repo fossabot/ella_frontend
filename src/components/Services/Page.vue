@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import serviceMixin from "@/components/Services/serviceMixin";
-import ActionButtonGroup from "@/components/Services/ActionButtonGroup"
+import serviceMixin from "/src/components/Services/serviceMixin.js";
+import ActionButtonGroup from "/src/components/Services/ActionButtonGroup.vue"
 
 /**
  * @module Page
@@ -20,7 +20,7 @@ import ActionButtonGroup from "@/components/Services/ActionButtonGroup"
  */
 
 export default {
-  name: "Page",
+  name: "PageService",
   mixins: [serviceMixin],
   components: [ActionButtonGroup],
   methods: {

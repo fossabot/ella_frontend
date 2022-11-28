@@ -5,10 +5,6 @@ $maxContentWidth: 900px;
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import 'node_modules/bootstrap-vue/src/index.scss';
 
-/**
-  Video styling
- */
-@import 'node_modules/video.js/src/css/video-js';
 
 @function set-text-color($color) {
   @if (lightness( $color ) > 40) {
@@ -73,5 +69,5 @@ body {
   }
 }
 
-@import "~@/theme/theme";
+@import "./theme/theme";
 

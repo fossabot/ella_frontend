@@ -43,13 +43,13 @@
 
 <script>
 import jsonForm from "@educorvi/vue-json-form"
-import serviceMixin from "@/components/Services/serviceMixin";
+import serviceMixin from "/src/components/Services/serviceMixin.js";
 import axios from "axios";
-import {fileOptions, normURLS} from "@/utilities/globals.mjs";
+import {fileOptions, normURLS} from "/src/utilities/globals.mjs";
 import {API_ROOT_URL, DISABLE_FORM_SAVING, INSTANCE_ID} from "../../../config";
 import {saveAs} from "file-saver";
 import {mapGetters} from "vuex";
-import ActionButtonGroup from "@/components/Services/ActionButtonGroup";
+import ActionButtonGroup from "/src/components/Services/ActionButtonGroup.vue";
 
 /**
  * @module Form
@@ -59,7 +59,7 @@ import ActionButtonGroup from "@/components/Services/ActionButtonGroup";
  */
 
 export default {
-  name: "Form",
+  name: "FormService",
   data() {
     return {
       indexOfAction: 0,

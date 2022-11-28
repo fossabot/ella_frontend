@@ -38,7 +38,8 @@
 
 import videojs from 'video.js';
 import playlist from 'videojs-playlist';
-import videoPlayerTranslation from "@/utilities/videoPlayerTranslation";
+import videoPlayerTranslation from "/src/utilities/videoPlayerTranslation.js";
+import 'video.js/src/css/video-js.scss';
 
 export default {
   name: "VideoPlayer",

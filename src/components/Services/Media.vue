@@ -20,12 +20,12 @@
 </template>
 
 <script>
-import serviceMixin from "@/components/Services/serviceMixin";
-import SingleFileAudioPlayer from "@/components/AV-Components/SingleFileAudioPlayer";
-import VideoPlayer from "@/components/AV-Components/VideoPlayer";
+import serviceMixin from "/src/components/Services/serviceMixin.js";
+import SingleFileAudioPlayer from "/src/components/AV-Components/SingleFileAudioPlayer.vue";
+import VideoPlayer from "/src/components/AV-Components/VideoPlayer.vue";
 
 export default {
-  name: "Media",
+  name: "MediaService",
   components: {VideoPlayer, SingleFileAudioPlayer},
   mixins: [serviceMixin],
   data() {

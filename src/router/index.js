@@ -13,27 +13,27 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import('../views/About.vue')
   },
   {
     path: '/services/:service',
     name: 'Service',
-    component: () => import(/* webpackChunkName: "Service" */ '../views/Service')
+    component: () => import('../views/Service.vue')
   },
   {
     path: '/load',
     name: "Load",
-    component: () => import(/* webpackChunkName: "load" */ '../views/Load')
+    component: () => import('../views/Load.vue')
   },
   {
     path: '/html',
     name: "HTML",
-    component: () => import(/* webpackChunkName: "htmlResponse" */ '../views/HTMLResponse')
+    component: () => import('../views/HTMLResponse.vue')
   },
   {
     path: '*',
     name: '404',
-    component: () => import(/* webpackChunkName: "notFound" */ '../views/notFound')
+    component: () => import('../views/notFound.vue')
   }
 ]
 

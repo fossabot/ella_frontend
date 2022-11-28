@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import serviceMixin from "@/components/Services/serviceMixin";
-import SideBarService from "@/components/Navigation/sidebarService";
+import serviceMixin from "/src/components/Services/serviceMixin.js";
+import SideBarService from "/src/components/Navigation/sidebarService.vue";
 
 /**
  * @module Group
@@ -19,7 +19,7 @@ import SideBarService from "@/components/Navigation/sidebarService";
  */
 
 export default {
-  name: "Group",
+  name: "GroupService",
   components: {SideBarService},
   mixins: [serviceMixin]
 }

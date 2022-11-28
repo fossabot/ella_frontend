@@ -115,7 +115,7 @@ function updateTheme() {
 module.exports = {getAllThemes, downloadThemeRelease, installTheme, initTheme}
 
 if (require.main === module) {
-    const {selectReleaseAndInstall} = require('./createSettings.js')
+    const {selectReleaseAndInstall} = require('./createSettings.cjs')
     switch (process.argv[2]) {
         case "install":
             downloadTheme(process.argv[3]).then(installTheme).catch(err => console.error(err.message));

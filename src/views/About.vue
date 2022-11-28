@@ -11,10 +11,10 @@
  * @description A hidden about page. Shows the app's version
  */
 export default {
-  name:"About",
+  name:"AboutView",
   computed: {
     version() {
-      return process.env.PACKAGE_VERSION;
+      return "ELLA_VERSION";
     }
   }
 }

@@ -3,7 +3,7 @@ const fs = require("fs");
 const term = require("terminal-kit").createTerminal();
 const waitOn = require("wait-on");
 const axios = require("axios");
-const {getAllThemes, downloadThemeRelease, installTheme, initTheme} = require("./installTheme");
+const {getAllThemes, downloadThemeRelease, installTheme, initTheme} = require("./installTheme.cjs");
 const rimraf = require('rimraf')
 
 const file = "config/ella.config.js";

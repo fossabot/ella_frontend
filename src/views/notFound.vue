@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {isLightColor, getCSSVariable} from "@/utilities/globals.mjs";
+import {isLightColor, getCSSVariable} from "/src/utilities/globals.mjs";
 
 /**
  * @module notFound
@@ -13,7 +13,7 @@ import {isLightColor, getCSSVariable} from "@/utilities/globals.mjs";
  * @description A view that indicates, that no matching service was found
  */
 export default {
-name: "notFound",
+name: "notFoundView",
   computed: {
     isLightColor() {
       return isLightColor(getCSSVariable('secondary'));

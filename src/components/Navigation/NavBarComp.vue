@@ -2,7 +2,7 @@
   <b-navbar toggleable="true" id="navbar" :type="isLightColor?'light':'dark'" class="navbarCustom" variant="primary">
     <router-link to="/">
       <b-navbar-brand>
-        <img v-if="img" id="logo" alt="Logo" src="@/assets/HeadLogo.png"/>
+        <img v-if="img" id="logo" alt="Logo" src="/src/assets/HeadLogo.png"/>
         <span v-if="mainData && txt" class="title-text">{{ mainData.title || title }}</span>
       </b-navbar-brand>
     </router-link>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import {isLightColor} from "@/utilities/globals.mjs";
+import {isLightColor} from "/src/utilities/globals.mjs";
 import {NAVBAR_STYLE, NAVBAR_VARIANTS, THEME_COLOR, TITLE} from "../../../config";
 import {mapGetters} from "vuex";
 

@@ -22,12 +22,12 @@
 </template>
 
 <script>
-import NavBarComp from "@/components/Navigation/NavBarComp";
+import NavBarComp from "/src/components/Navigation/NavBarComp.vue";
 import {mapGetters} from "vuex";
-import CustomSpinner from "@/components/CustomSpinner";
-import Sidebar from "@/components/Navigation/Sidebar";
+import CustomSpinner from "/src/components/CustomSpinner.vue";
+import Sidebar from "/src/components/Navigation/Sidebar.vue";
 import {TITLE, THEME_COLOR} from "../config"
-import {isLightColor, getCSSVariable} from "@/utilities/globals.mjs";
+import {isLightColor, getCSSVariable} from "/src/utilities/globals.mjs";
 
 
 /**

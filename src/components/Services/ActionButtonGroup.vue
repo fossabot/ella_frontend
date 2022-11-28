@@ -40,7 +40,7 @@ import jsonForm from "@educorvi/vue-json-form"
  */
 
 export default {
-  name: 'ActionButtonGroup',
+  name: 'ActionButtonGroupService',
   components: {jsonForm},
   props: {
     service: {

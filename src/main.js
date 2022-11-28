@@ -26,7 +26,11 @@ import 'vue-material/dist/theme/default.css'
 Vue.use(MdSteppers);
 Vue.use(MdButton);
 
-import './registerServiceWorker'
+import { registerSW } from "virtual:pwa-register";
+
+if ("serviceWorker" in navigator && !/localhost/.test(window.location)) {
+  registerSW();
+}
 
 import router from './router'
 import store from './store'

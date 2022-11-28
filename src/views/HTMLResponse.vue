@@ -5,7 +5,7 @@
 <script>
 import {mapGetters} from "vuex"
 export default {
-  name: "HTMLResponse",
+  name: "HTMLResponseView",
   computed: {...mapGetters(["customHTML"])}
 }
 </script>

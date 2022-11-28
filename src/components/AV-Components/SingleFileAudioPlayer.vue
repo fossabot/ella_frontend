@@ -36,7 +36,7 @@
 
 <script>
 import WaveSurfer from "wavesurfer.js";
-import {getCSSVariable} from "@/utilities/globals.mjs";
+import {getCSSVariable} from "/src/utilities/globals.mjs";
 
 export default {
   name: "SingleFileAudioPlayer",
