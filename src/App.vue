@@ -73,7 +73,6 @@ export default {
   },
   computed: {
     textVariant() {
-      console.log(isLightColor(getCSSVariable("danger")))
       return isLightColor(getCSSVariable("danger")) ? 'dark' : 'light';
     },
     ...mapGetters(["mainData"])

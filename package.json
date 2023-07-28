@@ -24,7 +24,7 @@
     "postdoc": "git add -A docs"
   },
   "dependencies": {
-    "@educorvi/vue-json-form": "^1.5.1",
+    "@educorvi/vue-json-form": "^1.5.3",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.21.2",
@@ -62,7 +62,7 @@
     "rimraf": "^3.0.2",
     "sass": "^1.32.12",
     "terminal-kit": "^2.0.7",
-    "vite": "^3.2.4",
+    "vite": "3.2.7",
     "vite-plugin-pwa": "^0.13.3",
     "wait-on": "^5.2.0"
   },

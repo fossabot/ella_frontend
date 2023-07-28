@@ -17,7 +17,7 @@
       </div>
       <hr>
     </div>
-    <json-form v-if="form" :json="form" :onSubmit="onSubmit" :ui="service.ui">
+    <json-form v-if="form" :json="form" :onSubmit="onSubmit" :ui="service.ui" :disableValidation="true">
       <div style="width: 100%; display: flex; justify-content: center">
         <ActionButtonGroup :doing="doing" :save-button="!DISABLE_FORM_SAVING"
                            :selected="selected" :service="service"
