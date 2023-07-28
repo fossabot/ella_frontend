@@ -6,10 +6,10 @@
       <div v-if="!DISABLE_FORM_SAVING">
         <b-button @click="loadForm">Gespeichertes Formular laden</b-button>
         <b-collapse v-model="upload">
-          <div style="max-width: 100%; overflow-x: scroll">
-            <b-file v-model="uploadFile" accept=".efa" browse-text="Durchsuchen" class="m-2"
+          <div style="max-width: 100%; overflow: hidden" class="m-2">
+            <b-file v-model="uploadFile" accept=".efa" browse-text="Durchsuchen" class="w-100"
                     drop-placeholder="Datei ablegen"
-                    placeholder="Keine Datei ausgewählt" style="max-width: 100%"
+                    placeholder="Keine Datei ausgewählt" style="max-width: 100%;"
                     @input="loadForm"></b-file>
           </div>
         </b-collapse>
