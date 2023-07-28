@@ -1,12 +1,12 @@
 <template>
-  <b-card class="m-3" no-body>
+  <b-card class="m-3" no-body :class="error?'playerError':''">
     <b-card-img v-if="song.imageurl" :src="song.imageurl" :alt="song.imagecaption"></b-card-img>
     <b-card-body>
       <div :id="player_id">
         <p style="font-size: large; font-weight: bold">{{ song.title }}</p>
         <div class="audiocontrols">
           <button aria-label="Wiedergabebutton" :aria-pressed="playing" class="play-pause-button clickable" style="background: transparent; border: none">
-            <b-icon-play-circle @click="()=>wavesurfer.play()" v-if="!playing" class="mediaicon playcircle" :variant="ready?'primary':'lightgrey'"
+            <b-icon-play-circle @click="()=>{if(ready)wavesurfer.play()}" v-if="!playing" class="mediaicon playcircle" :variant="ready?'primary':'lightgrey'"
                                 animation="pulse"></b-icon-play-circle>
             <b-icon-pause-circle @click="pause" v-else class="mediaicon pausecircle" variant="primary"
                                  animation="pulse"></b-icon-pause-circle>
@@ -59,7 +59,8 @@ export default {
       player_id: 'player_' + (Math.random() + 1).toString(36).substring(7),
       subtitles: null,
       current_subtitle: null,
-      playing: false
+      playing: false,
+      error: false
     };
   },
   created() {
@@ -128,6 +129,10 @@ export default {
     });
     this.wavesurfer.on('error', (e) => {
       console.error(e);
+      this.error = true;
+      this.ready = false;
+      this.playing = false
+      this.current_subtitle.subtitle = "Fehler beim Laden der Audiodatei. Bitte laden Sie die Seite neu."
     });
     this.wavesurfer.on('finish', () => {
       this.$emit("finish")
@@ -140,7 +145,7 @@ export default {
       // update subtitles
       if (this.subtitles) {
         for (const subtitle of this.subtitles) {
-          if (subtitle.stopTime > time * 1000) {
+          if (subtitle.stopTime > time * 1000 && this.ready) {
             this.current_subtitle = subtitle;
             break;
           }
@@ -182,6 +187,13 @@ wave {
 <style lang="scss" scoped>
 @import "src/styles";
 
+.playerError {
+  border-color: red;
+  .audio_subtitle {
+    color: red;
+    font-weight: bold;
+  }
+}
 
 .audiocontrols {
   height: 85px;
@@ -221,7 +233,7 @@ wave {
 }
 
 @mixin thumb() {
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+  box-shadow: 1px 1px 1px #000000, 0 0 1px #0d0d0d; /* Add cool effects to your sliders! */
   border: 1px solid #000000;
   height: 70px;
   width: 16px;
@@ -258,7 +270,7 @@ input[type=range] {
 
 
   &:focus {
-    outline-color: $primary; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+    outline-color: $primary;
   }
 
 
