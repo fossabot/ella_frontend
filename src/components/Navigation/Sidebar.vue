@@ -9,19 +9,17 @@
         no-header>
 
       <div v-if="mainData && !mainData.error">
-        <div class="sidebarHead pr-5">
-          <b-row align-v="center">
-            <b-col>
+        <div class="sidebarHead">
+          <div style="display: flex; align-items: start; justify-content: space-between; width: 100%">
+            <div>
               <h6 v-if="SIDEBAR_TITLE" style="font-weight: bold" class="mb-0">{{SIDEBAR_TITLE}}</h6>
               <div v-else-if="mainData">
                 <h4 class="mb-1">{{ mainData.title }}</h4>
                 <p class="text-muted mb-0">{{ mainData.description }}</p>
               </div>
-            </b-col>
-            <b-col cols="1">
-              <b-icon-x @click="sidebar=false" class="h4 clickable m-0"/>
-            </b-col>
-          </b-row>
+            </div>
+            <b-icon-x @click="sidebar=false" class="h4 clickable"/>
+          </div>
         </div>
 
         <div class="pt-2">
@@ -86,6 +84,8 @@ export default {
     padding: 5px 10px;
     background-color: white;
     z-index: 10000;
+    hyphens: auto;
+    width: 100%;
   }
 }
 </style>
