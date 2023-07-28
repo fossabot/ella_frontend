@@ -43,20 +43,45 @@ const commonConfig = {
                 ]
             },
             workbox: {
-                runtimeCaching: [{
-                    urlPattern: new RegExp('^'+API_ROOT_URL),
-                    handler: 'StaleWhileRevalidate',
-                    options: {
-                        cacheName: 'api-cache',
-                        cacheableResponse: {
-                            statuses: [0, 200],
+                globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+                runtimeCaching: [
+                    {
+                        // the last option is due to plone images ending on 'image'
+                        urlPattern: new RegExp('.*(png|jpg|jpeg|image)'),
+                        handler: 'StaleWhileRevalidate',
+                        options: {
+                            cacheName: 'image-cache',
+                            cacheableResponse: {
+                                statuses: [0, 200],
+                            },
                         },
                     },
-                }]
+                    {
+                        // the last option is due to plone images ending on 'image'
+                        urlPattern: new RegExp('.*(mp3|wav)'),
+                        handler: 'StaleWhileRevalidate',
+                        options: {
+                            cacheName: 'audio-cache',
+                            cacheableResponse: {
+                                statuses: [0, 200],
+                            },
+                        },
+                    },
+                    {
+                        urlPattern: new RegExp('^' + API_ROOT_URL),
+                        handler: 'StaleWhileRevalidate',
+                        options: {
+                            cacheName: 'api-cache',
+                            cacheableResponse: {
+                                statuses: [0, 200],
+                            },
+                        }
+                    },
+                ]
             }
         })]
 }
-export default defineConfig(({command})=>{
+export default defineConfig(({command}) => {
     if (command === "build") {
         commonConfig.define = {
             "ELLA_VERSION": version
