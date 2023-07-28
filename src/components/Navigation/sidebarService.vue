@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="cust" v-bind:class="{active: isActive}">
+    <div class="cust" v-bind:class="{active: isActive}" v-if="!service['hidden']">
       <b-row align-v="center" class="clickable" @click="action">
         <b-col cols="1">
           <div class="pl-2 sidebarSymbolParent">
