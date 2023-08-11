@@ -2,6 +2,7 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/educorvi/ella_frontend)](https://github.com/educorvi/ella_frontend/releases/latest)
 [![Build](https://github.com/educorvi/ella_frontend/actions/workflows/node.js.yml/badge.svg)](https://github.com/educorvi/ella_frontend/actions/workflows/node.js.yml)
 [![GitHub issues](https://img.shields.io/github/issues/educorvi/ella_frontend)](https://github.com/educorvi/ella_frontend/issues)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Feducorvi%2Fella_frontend.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Feducorvi%2Fella_frontend?ref=badge_shield)
 ## Project setup
 ```
 npm install
@@ -39,3 +40,7 @@ npm run build
 
 ### Komponentendokumentation
 [https://educorvi.github.io/ella_frontend](https://educorvi.github.io/ella_frontend/)
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Feducorvi%2Fella_frontend.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Feducorvi%2Fella_frontend?ref=badge_large)
